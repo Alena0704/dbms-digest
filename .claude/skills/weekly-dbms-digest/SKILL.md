@@ -58,10 +58,10 @@ Scan the four key lists for the current time window. Use the PostgreSQL list arc
 
 **Format for mailing list items** (goes in the `## PostgreSQL mailing lists` section):
 ```
-- **[hackers] <Thread subject>** — <one line: what was proposed/found/decided and why it matters>. [link](archive URL)
-- **[bugs] <Thread subject>** — <one line: confirmed bug / regression / data-loss risk>. [link](archive URL)
+- **[hackers] [<Thread subject>](archive URL)** — <one line: what was proposed/found/decided and why it matters>. *(<proposer/committer>)* `[patch posted]`
+- **[bugs] [<Thread subject>](archive URL)** — <one line: confirmed bug / regression / data-loss risk>. *(<reporter>)* `[open]`
 ```
-Tag with the list name in brackets. Link to the thread root in the archive, not to a specific reply (unless a specific reply is the event). Append `[committed]`, `[rejected]`, `[patch posted]`, `[needs review]`, or `[open]` to show where things stand.
+Tag with the list name in brackets and make the **thread subject the link** — to the thread root in the archive, not a specific reply (unless a specific reply is the event). Add the key person (proposer / committer / reporter) in italics after the line, e.g. `*(Jeff Davis · pgsql-hackers)*`. Append `[committed]`, `[rejected]`, `[patch posted]`, `[needs review]`, or `[open]` to show where things stand.
 
 ### 4. Discover emerging sources (self-update)
 
@@ -102,43 +102,46 @@ Use the exact format below. Keep each line to roughly one sentence — the value
 ```
 # DBMS Weekly — <YYYY-MM-DD> (week of <start>–<end>)
 
-_<N> items · sources scanned: <count> · filtered out as marketing/ads: <count>_
-
 ## PostgreSQL
-- **<Headline>** — <one-line why-it-matters>. [link](URL)
+- **[<Headline>](URL)** — <one-line why-it-matters>. *(<Author> · <source>)*
 - ...
 
 ## PostgreSQL mailing lists
-- **[hackers] <Thread subject>** — <one line: what was proposed/found/decided>. [link](archive URL) `[patch posted]`
-- **[bugs] <Thread subject>** — <one line: confirmed bug or regression>. [link](archive URL) `[open]`
+- **[hackers] [<Thread subject>](archive URL)** — <one line: what was proposed/found/decided>. *(<proposer>)* `[patch posted]`
+- **[bugs] [<Thread subject>](archive URL)** — <one line: confirmed bug or regression>. *(<reporter>)* `[open]`
 - ...
 
 ## Wider DBMS & distributed data
-- **<Headline>** — <one line>. [link](URL)
+- **[<Headline>](URL)** — <one line>. *(<Author> · <source>)*
 - ...
 
 ## Commercial engines (SQL Server, Oracle, MySQL, …)
-- **<Headline>** — <one line on the new technique/invention>. [link](URL)
+- **[<Headline>](URL)** — <one line on the new technique/invention>. *(<Author> · <source>)*
 - ...
 
 ## Migration experience
-- **<Headline>** — <one line on what actually happened>. [link](URL)
+- **[<Headline>](URL)** — <one line on what actually happened>. *(<Author> · <source>)*
 - ...
 
 ## Research & cutting edge
-- **<Headline>** — <one line>. [link](URL)  _[paper]_
+- **[<Headline>](URL)** — <one line>. *(<authors / venue>)* _[paper]_
 - ...
 
 ## New sources added this week
-- <source name> — <why it's worth following>. [link](URL)
+- **[<source name>](URL)** — <why it's worth following>. *(<author>)*
+
+---
+
+_<N> items · sources scanned: <count> · filtered out as marketing/ads: <count>_
 ```
 
 Notes on the format:
-- Bold the headline so the eye lands on it; the one-liner says *why a Postgres hacker should care*, not just what it is.
+- **The headline is the link** (`**[Headline](URL)**`) — one big tap target, ideal on a phone; do not add a trailing `[link]`. The one-liner says *why a Postgres hacker should care*, not just what it is.
+- **End each item with the author/source in italics**, e.g. `*(Christophe Pettus · thebuild.com)*`. Include the author's name when it isn't already in the one-liner; otherwise just the source/site (or venue, for papers). On a phone this lets the reader triage before tapping.
 - Append `[paper]`, `[unverified]`, `[by committer]`, or `[vendor blog — substantive]` tags only when useful.
 - **Release items** (extension/utility releases) may break the one-line rule: give a headline line plus an optional short indented sub-list of the key changes (new features, notable fixes, breaking changes, target server version). Example:
   ```
-  - **pg_kpart 1.0** — new index-time guard against full-partition scans. [link](URL)
+  - **[pg_kpart 1.0](URL)** — new index-time guard against full-partition scans. *(<author> · <source>)*
       - rejects queries that scan all partitions without the partition key
       - PostgreSQL 18+
   ```
@@ -148,11 +151,11 @@ Notes on the format:
 ## Example items
 
 **Good (keep):**
-`- **Skip scan lands in Postgres 18** — btree now skips leading index columns, killing a class of "add a redundant index" workarounds; commit shows up to 20x on low-cardinality prefixes. [link](URL)`
+`- **[Skip scan lands in Postgres 18](URL)** — btree now skips leading index columns, killing a class of "add a redundant index" workarounds; commit shows up to 20x on low-cardinality prefixes. *(pganalyze.com)*`
 
-`- **[hackers] Rethink hash join memory accounting** — Melanie Plageman proposes replacing the current executor-side batch-spill heuristic with a planner-visible cost model; thread has substantive back-and-forth on the right abstraction boundary. [link](URL) [patch posted]`
+`- **[hackers] [Rethink hash join memory accounting](URL)** — Melanie Plageman proposes replacing the current executor-side batch-spill heuristic with a planner-visible cost model; thread has substantive back-and-forth on the right abstraction boundary. *(Melanie Plageman · pgsql-hackers)* [patch posted]`
 
-`- **[bugs] Logical replication silently drops rows on publisher restart under load** — confirmed regression in 17.2, bisected to commit abc1234; workaround posted, fix in progress. [link](URL) [open]`
+`- **[bugs] [Logical replication silently drops rows on publisher restart under load](URL)** — confirmed regression in 17.2, bisected to commit abc1234; workaround posted, fix in progress. *(pgsql-hackers)* [open]`
 
 **Bad (filter out):**
 `- "Acme DB raises $40M Series B to revolutionize the cloud-native AI-ready database" — funding announcement, no technical content. (excluded)`

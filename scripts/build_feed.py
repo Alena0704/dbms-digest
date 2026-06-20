@@ -60,6 +60,18 @@ def title_of(text: str, monday: dt.date) -> str:
     return f"DBMS Weekly — week of {monday:%Y-%m-%d}–{sunday:%Y-%m-%d}"
 
 
+def strip_leading_h1(text: str) -> str:
+    """Drop the first level-1 heading: the reader already shows the item title,
+    so repeating it as an <h1> just wastes the top of the screen."""
+    out, dropped = [], False
+    for line in text.splitlines():
+        if not dropped and line.startswith("# "):
+            dropped = True
+            continue
+        out.append(line)
+    return "\n".join(out).lstrip("\n")
+
+
 def md_to_html(text: str) -> str:
     return markdown.markdown(text, extensions=["extra", "sane_lists"])
 
@@ -91,7 +103,7 @@ def build_feed(items: list[tuple[dt.date, Path]]) -> str:
         title = title_of(text, monday)
         link = f"{REPO_BLOB}/digests/{path.name}"
         guid = f"dbms-digest-{monday:%Y-%m-%d}"
-        content_html = md_to_html(text)
+        content_html = md_to_html(strip_leading_h1(text))
         parts += [
             "    <item>",
             f"      <title>{escape(title)}</title>",
