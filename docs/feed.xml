@@ -5,7 +5,7 @@
     <link>https://danolivo.github.io/dbms-digest/</link>
     <description>A weekly, ad-free, fact-checked roundup of PostgreSQL &amp; wider DBMS internals, news, and research. Monday → Sunday.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 20 Jun 2026 17:17:16 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jun 2026 17:27:24 +0000</lastBuildDate>
     <atom:link href="https://danolivo.github.io/dbms-digest/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DBMS Weekly — 2026-06-14 (week of 2026-06-08–2026-06-14)</title>
@@ -49,6 +49,7 @@
 <ul>
 <li><strong><a href="https://habr.com/ru/companies/postgrespro/articles/1045532/">Postgres Pro evolves a "Virtual DBA" LLM agent's environment with record/replay</a></strong> — Postgres Professional ran an evolutionary search over a Postgres-diagnosis agent's setup (prompts, analysis steps, MCP tools) by recording and fast-replaying real workloads; a headline finding is that handing the agent <em>more</em> tools can actually worsen its final verdict. <em>(Postgres Professional · habr.com)</em> [ru] <em>(orig: «Промпты, RAG, LLM-тюнинг, Harness… Идём дальше?»)</em></li>
 <li><strong><a href="https://habr.com/ru/articles/1047374/">Three discovery problems with Postgres master/replica — and a lightweight fix</a></strong> — finding the master after failover, picking a replica within an acceptable lag, and guaranteeing read-your-writes, solved with a small HTTP service (pg-status) instead of DNS/HAProxy hacks that don't understand replication LSN. <em>(krylosov-aa · habr.com)</em> [ru] <em>(orig: «Три задачи discovery при работе с PostgreSQL master/replica — и как их решить»)</em></li>
+<li><strong><a href="https://2026.sigmod.org/sigmod_papers.shtml">OceanBase lands a batch of papers at SIGMOD/VLDB 2026</a></strong> — surfaced via the Chinese DB community 墨天轮; the Ant Group distributed-RDBMS vendor's top-venue haul, with three worth mining for our own engine: <em>TaCo</em> (query-aware subspace collision for high-dimensional ANN search), <em>ESTune</em> (Bayesian uncertainty-guided early stopping for knob tuning), and <em>Secure Multi-Party Sampling over Joins</em> (VLDB). <em>(墨天轮 / modb.pro)</em> [zh] <em>(orig: «OceanBase 多篇论文被国际顶会录用»)</em></li>
 </ul>
 <h2>Research &amp; cutting edge</h2>
 <ul>
@@ -77,7 +78,7 @@
 </ul>
 <p><em>July itself is quiet for relational-DB conferences (only a Postgres meetup in Istanbul on Jul 2, programme TBA); the next program-rich events are PGDay UK (Sep 8) and PGConf.EU (Valencia, Oct 20–23).</em></p>
 <hr />
-<p><em>23 items · sources scanned: ~30 · community threads scanned: HN (40 DB stories) · international: 2 (ru) · CFPs open: 4 · upcoming events: 1 · filtered out as marketing/ads: 8</em></p>]]></content:encoded>
+<p><em>23 items · sources scanned: ~30 · community threads scanned: HN (40 DB stories) · international: 3 (ru, zh) · CFPs open: 4 · upcoming events: 1 · filtered out as marketing/ads: 8</em></p>]]></content:encoded>
     </item>
     <item>
       <title>DBMS Weekly — 2026-06-07 (week of 2026-06-01–2026-06-07)</title>

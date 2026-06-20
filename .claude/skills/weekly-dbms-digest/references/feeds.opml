@@ -39,9 +39,14 @@
            (same team, mostly mirrored content). -->
       <outline type="link" text="Cybertec (DE) [browser - discover feed; EN mirror exists]" htmlUrl="https://www.cybertec-postgresql.com/de/"/>
     </outline>
-    <outline text="Chinese [zh] - discover feeds via browser; add here when confirmed">
-      <!-- PingCAP/TiDB, OceanBase, PolarDB / Alibaba Cloud, modb.pro: feed URLs not yet
-           confirmed - find with the browser and add as type="rss" entries. -->
+    <outline text="Chinese [zh] - browser-rendered; no clean RSS, heavy vendor-PR (filter hard)">
+      <!-- Browser-confirmed 2026-06-20: modb.pro renders fine via Claude-in-Chrome.
+           cn.pingcap.com never reaches document_idle (long-polling) - get_page_text times out;
+           use read_page (screenshot) or modb instead. Chinese DB media is dense vendor PR
+           (Dameng, Kingbase, GoldenDB, Highgo, ...) - drop it; mine OceanBase/TiDB/PolarDB
+           research and genuine internals posts. -->
+      <outline type="link" text="modb.pro - 墨天轮 DB news [browser - confirmed]" htmlUrl="https://www.modb.pro/dbNews"/>
+      <outline type="link" text="PingCAP/TiDB CN blog [browser - slow; use read_page]" htmlUrl="https://cn.pingcap.com/blog/"/>
     </outline>
   </body>
 </opml>

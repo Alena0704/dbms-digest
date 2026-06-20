@@ -9,8 +9,8 @@ GitHub Pages):
                                  Item links point at the in-site rendered page.
 * ``docs/index.html``          – on-brand landing page: banner, subscribe, digest index
                                  linking to the in-site rendered pages (not GitHub).
-* ``docs/digests/<date>.html`` – one rendered, on-brand page per digest, so clicking a
-                                 digest stays on the site with nicely rendered Markdown.
+* ``docs/digests/<date>.html`` – one rendered, on-brand page per digest, with a sticky
+                                 left-column section menu (table of contents).
 
 Run from the repo root:  python3 scripts/build_feed.py
 No arguments. Safe to re-run; it fully regenerates everything each time.
@@ -44,10 +44,12 @@ DATE_RE = re.compile(r"^(\d{4})-(\d{2})-(\d{2})\.md$")
 CSS = """
     :root { --navy:#0d1b2e; --navy2:#13243a; --blue:#5a8bd4; --amber:#f5a623; --ink:#e7eef7; --mut:#8aa0bd; }
     * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
     body { margin:0; background:var(--navy); color:var(--ink);
       font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
     a { color:var(--blue); }
     .wrap { max-width:760px; margin:0 auto; padding:24px 20px 64px; }
+    .wrap.wide { max-width:1060px; }
     .banner img { width:100%; height:auto; border-radius:12px; display:block; }
     .sublabel { font-size:1.05rem; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); margin:28px 0 4px; }
     p.lead { color:var(--ink); margin:0 0 20px; }
@@ -68,10 +70,23 @@ CSS = """
     .backlink:hover { color:var(--amber); }
     footer { margin-top:40px; color:var(--mut); font-size:.85rem; border-top:1px solid var(--navy2); padding-top:18px; }
     footer a { color:var(--blue); }
+    /* two-column digest layout with a sticky section menu */
+    .layout { display:block; }
+    nav.toc { display:none; }
+    @media (min-width:980px) {
+      .layout { display:grid; grid-template-columns:220px minmax(0,1fr); gap:44px; align-items:start; }
+      nav.toc { display:block; position:sticky; top:24px; font-size:.85rem; }
+    }
+    nav.toc .toc-title { text-transform:uppercase; letter-spacing:.14em; font-size:.72rem; color:var(--mut); margin:0 0 10px; }
+    nav.toc ul { list-style:none; padding:0; margin:0; }
+    nav.toc li { margin:2px 0; border:0; }
+    nav.toc a { display:block; padding:4px 10px; color:var(--mut); text-decoration:none;
+      border-left:2px solid var(--navy2); line-height:1.35; }
+    nav.toc a:hover { color:var(--amber); border-left-color:var(--amber); }
     /* rendered digest prose */
     .prose h1 { font-size:1.5rem; line-height:1.25; margin:8px 0 18px; color:var(--ink); }
     .prose h2 { font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--amber);
-      border-top:1px solid var(--navy2); padding-top:22px; margin:34px 0 12px; }
+      border-top:1px solid var(--navy2); padding-top:22px; margin:34px 0 12px; scroll-margin-top:20px; }
     .prose p { margin:.5em 0 1em; }
     .prose ul { padding-left:1.2em; margin:.4em 0 1.2em; }
     .prose li { margin:.5em 0; }
@@ -87,7 +102,6 @@ CSS = """
 
 
 def digest_files() -> list[tuple[dt.date, Path]]:
-    """Return (monday_date, path) for every well-named digest, newest first."""
     items = []
     for p in DIGESTS.glob("*.md"):
         m = DATE_RE.match(p.name)
@@ -133,7 +147,26 @@ def page_rel(monday: dt.date) -> str:
 def build_digest_page(monday: dt.date, path: Path) -> str:
     text = path.read_text(encoding="utf-8")
     title = title_of(text, monday)
-    body = md_to_html(text)  # keep the H1 — it's the page's heading
+    md = markdown.Markdown(extensions=["extra", "sane_lists", "toc"])
+    body = md.convert(text)  # keeps the H1 and adds id slugs to every heading
+
+    # Build a section menu from the level-2 headings.
+    sections: list[tuple[str, str]] = []
+
+    def walk(tokens):
+        for t in tokens:
+            if t["level"] == 2:
+                sections.append((t["id"], t["name"]))
+            walk(t.get("children", []))
+
+    walk(md.toc_tokens)
+    if sections:
+        links = "\n".join(
+            f'        <li><a href="#{i}">{html.escape(n)}</a></li>' for i, n in sections)
+        toc = f'<nav class="toc"><p class="toc-title">Sections</p>\n      <ul>\n{links}\n      </ul>\n    </nav>'
+    else:
+        toc = ""
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,11 +177,14 @@ def build_digest_page(monday: dt.date, path: Path) -> str:
   <style>{CSS}</style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="wrap wide">
     <a class="backlink" href="../index.html">← All digests</a>
-    <article class="prose">
+    <div class="layout">
+    {toc}
+      <article class="prose">
 {body}
-    </article>
+      </article>
+    </div>
     <footer>
       <a href="../index.html">← All digests</a> ·
       <a href="../feed.xml">RSS feed</a> ·
