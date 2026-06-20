@@ -20,14 +20,16 @@ Whenever you open this project (in Cowork or Claude Code), run the following rou
 3. **Generate the absent digests.** For each missing week, use the **`weekly-dbms-digest`**
    skill (`.claude/skills/weekly-dbms-digest/SKILL.md`) to build that week's digest over the
    exact Monday→Sunday window. Follow the skill in full — gather, scan the mailing lists,
-   discover sources, filter out marketing, fact-check — and write the result to
-   `digests/<Monday>.md`. Generate oldest-first.
+   scan the community sources for the **Community pulse**, discover sources, filter out
+   marketing, fact-check — and write the result to `digests/<Monday>.md`. Generate oldest-first.
 
 4. **Update the index.** Add a link to each new digest in the `## Digests` section of
    `README.md`, newest first: `- [YYYY-MM-DD — week of …](digests/YYYY-MM-DD.md)`.
 
-5. **Keep sources fresh.** The skill may append new sources to
-   `.claude/skills/weekly-dbms-digest/references/sources.md`. Include those edits in the commit.
+5. **Keep sources fresh.** The skill may edit its source lists —
+   `.claude/skills/weekly-dbms-digest/references/sources.md` (publishers) and
+   `references/community-sources.md` (forums/chats/channels: new ones discovered, dead ones
+   retired). Include those edits in the commit.
 
 6. **Rebuild the RSS feed.** Whenever any digest was added or changed, run
    `python3 scripts/build_feed.py` to regenerate `docs/feed.xml` and `docs/index.html` from the

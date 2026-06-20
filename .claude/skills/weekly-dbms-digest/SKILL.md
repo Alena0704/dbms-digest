@@ -63,13 +63,21 @@ Scan the four key lists for the current time window. Use the PostgreSQL list arc
 ```
 Tag with the list name in brackets and make the **thread subject the link** — to the thread root in the archive, not a specific reply (unless a specific reply is the event). Add the key person (proposer / committer / reporter) in italics after the line, e.g. `*(Jeff Davis · pgsql-hackers)*`. Append `[committed]`, `[rejected]`, `[patch posted]`, `[needs review]`, or `[open]` to show where things stand.
 
-### 4. Discover emerging sources (self-update)
+### 4. Scan community discussion — the “Community pulse”
+
+Read `references/community-sources.md` and scan the **scannable** community sources (the `[public]` / `[js]` ones) for the time window: forums and link aggregators (Hacker News, Lobsters), the database subreddits, Q&A hot lists (DBA Stack Exchange), and any pinned public Telegram channels. The goal is **what people actually argued about this week**, ranked by real engagement (HN points + comments, Reddit upvotes + comments, SE votes/answers) — not by mere existence.
+
+Pick the 3–8 threads with the most substantive discussion. **Dedupe against the rest of the digest**: if a thread is just reactions to an article already listed above, fold it in or skip it — the Community pulse is for discussion that is itself the story (design debates, war stories, “wait, does Postgres really do X?”, surprising benchmarks people are passing around). Apply the same anti-marketing filter, and link to the thread itself.
+
+Follow `community-sources.md`'s upkeep rules every run: **discover** new active DB communities (a fresh subreddit, a Discourse forum, a public Telegram/Matrix channel) and append keepers to its Discovery log; **prune** any listed source that's been silent for ~3 months, is gone, or has turned promotional by moving it to that file's Retired log (with date + reason) so it leaves the weekly scan but isn't blindly re-added. `[auth]` sources (the community Slack / Discord / IRC) stay listed but are **not** scanned until a connector or credential exists — never fabricate their content.
+
+### 5. Discover emerging sources (self-update)
 
 Each run, spend a little effort looking for **new, high-quality sources** that aren't yet in `references/sources.md`: a new independent engineering blog, a fresh research group page, a newly active newsletter, a conference that just posted proceedings. Good signals are: cited by sources you already trust, written by known contributors, deep technical content with no sales pitch.
 
 When you find a keeper, **append it to `references/sources.md`** under the right section with a one-line note on why it's worth watching. This is how the skill stays current instead of going stale. Conversely, if a listed source has gone dormant or turned into pure marketing, mark it accordingly.
 
-### 5. Filter out marketing, ads, and promotion
+### 6. Filter out marketing, ads, and promotion
 
 This is the core value of the digest. **Exclude** an item (or flag it clearly if it's borderline but still has real content) when it shows the hallmarks of marketing rather than engineering:
 
@@ -89,11 +97,11 @@ This is the core value of the digest. **Exclude** an item (or flag it clearly if
 
 **Migration experience.** Actively look for real-world migration experience reports — moving to/from Postgres, Oracle→Postgres, MySQL→Postgres, cross-cloud, version upgrades at scale — where the author shares what actually happened (pitfalls, downtime, data discrepancies, tooling, rollback). These are high-value; prioritise them. Generic "why you should migrate to our product" posts are marketing — cut them.
 
-### 6. Fact-check before including
+### 7. Fact-check before including
 
 For each surviving item, do a quick sanity pass: does the headline claim match the body? Are benchmark claims accompanied by setup details (hardware, dataset, versions)? Is a "Postgres now does X" claim actually in a release/commit, or just speculation? Cross-check surprising claims against a second source (commit, mailing-list thread, the actual paper). If a claim can't be substantiated, either drop the item or append a short `[unverified]` note so the reader knows.
 
-### 7. Write the digest
+### 8. Write the digest
 
 Use the exact format below. Keep each line to roughly one sentence — the value is in being scannable. Order items by importance (most significant first), lightly grouped by theme. Aim for ~10–25 items; quality over quantity. If a slow week yields little, a short honest digest beats padding.
 
@@ -109,6 +117,10 @@ Use the exact format below. Keep each line to roughly one sentence — the value
 ## PostgreSQL mailing lists
 - **[hackers] [<Thread subject>](archive URL)** — <one line: what was proposed/found/decided>. *(<proposer>)* `[patch posted]`
 - **[bugs] [<Thread subject>](archive URL)** — <one line: confirmed bug or regression>. *(<reporter>)* `[open]`
+- ...
+
+## Community pulse
+- **[<What people were arguing about>](thread URL)** — <one line on the debate / war story / surprise and where it landed>. *(<platform> · <N pts / comments>)*
 - ...
 
 ## Wider DBMS & distributed data
@@ -145,6 +157,7 @@ Notes on the format:
       - rejects queries that scan all partitions without the partition key
       - PostgreSQL 18+
   ```
+- **Community pulse items** link to the discussion thread and tag the platform plus a rough engagement signal, e.g. `*(Hacker News · 240 pts, 180 comments)*` or `*(r/PostgreSQL · 95 upvotes)*`. Keep to the 3–8 most-discussed threads, deduped against the rest of the digest.
 - **Skip empty sections silently.** Omit any section that has no items — do NOT write "nothing this week", "no items found", or an apology/explanation. A missing section just means nothing qualified; the reader infers that. Never add filler narration about gaps.
 - If delivering to Telegram or another plain-text channel later, the same content works; just drop the Markdown headers to bullet groups if the target doesn't render Markdown.
 
@@ -156,6 +169,8 @@ Notes on the format:
 `- **[hackers] [Rethink hash join memory accounting](URL)** — Melanie Plageman proposes replacing the current executor-side batch-spill heuristic with a planner-visible cost model; thread has substantive back-and-forth on the right abstraction boundary. *(Melanie Plageman · pgsql-hackers)* [patch posted]`
 
 `- **[bugs] [Logical replication silently drops rows on publisher restart under load](URL)** — confirmed regression in 17.2, bisected to commit abc1234; workaround posted, fix in progress. *(pgsql-hackers)* [open]`
+
+`- **[Why is everyone suddenly moving off RDS?](URL)** — 300-comment HN thread trading cost and lock-in war stories; the substance is the migration tactics in the replies, not the headline. *(Hacker News · 300+ comments)*`
 
 **Bad (filter out):**
 `- "Acme DB raises $40M Series B to revolutionize the cloud-native AI-ready database" — funding announcement, no technical content. (excluded)`
