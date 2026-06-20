@@ -55,6 +55,8 @@ CSS = """
     .wrap { max-width:760px; margin:0 auto; padding:24px 20px 64px; }
     .wrap.wide { max-width:1060px; }
     .banner img { width:100%; height:auto; border-radius:12px; display:block; }
+    .site-title { font-size:1.6rem; margin:26px 0 8px; color:var(--ink); }
+    .intro { color:var(--mut); margin:0 0 6px; font-size:1.02rem; line-height:1.6; }
     .sublabel { font-size:1.05rem; letter-spacing:.18em; text-transform:uppercase; color:var(--mut); margin:28px 0 4px; }
     p.lead { color:var(--ink); margin:0 0 20px; }
     .sub { display:inline-flex; align-items:center; gap:8px; background:var(--amber); color:var(--navy);
@@ -311,6 +313,15 @@ def build_index(items: list[tuple[dt.date, Path]]) -> str:
 <body>
   <div class="wrap">
     <div class="banner"><img src="banner.jpg" alt="{html.escape(FEED_TITLE)} — a weekly roundup for internals developers &amp; database administrators."></div>
+
+    <h1 class="site-title">DBMS Digest — weekly PostgreSQL &amp; database internals</h1>
+    <p class="intro">A weekly, ad-free, fact-checked roundup of what actually happened in
+    PostgreSQL and the wider database world: new internals and features, notable
+    <code>pgsql-hackers</code>/<code>-bugs</code>/<code>-performance</code> threads, what the
+    community argued about, real migration war stories, techniques from commercial engines
+    (SQL Server, Oracle, MySQL, OceanBase), cutting-edge research, and upcoming conferences and
+    CFPs. Built for database <strong>internals developers</strong> and DBAs who want signal, not
+    marketing — roughly 15–25 scannable links per week, Monday → Sunday.</p>
 
     <p class="sublabel">Subscribe</p>
     <p class="lead">{html.escape(FEED_DESC)}</p>
