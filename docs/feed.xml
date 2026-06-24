@@ -5,7 +5,7 @@
     <link>https://danolivo.github.io/dbms-digest/</link>
     <description>A weekly, ad-free, fact-checked roundup of PostgreSQL &amp; wider DBMS internals, news, and research. Monday → Sunday.</description>
     <language>en</language>
-    <lastBuildDate>Mon, 22 Jun 2026 09:15:19 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Jun 2026 13:14:16 +0000</lastBuildDate>
     <atom:link href="https://danolivo.github.io/dbms-digest/feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>DBMS Weekly — 2026-06-15 (week of 2026-06-15–2026-06-21)</title>
@@ -40,6 +40,12 @@
 <ul>
 <li><strong><a href="http://www.mail-archive.com/pgsql-hackers@lists.postgresql.org/msg231273.html">[hackers] Conflict log history table for Logical Replication — a lost-conflict bug surfaces</a></strong> — the PG20-targeted feature that lets a subscription log apply-time conflicts to a system-managed table (in a <code>pg_conflict</code> schema) instead of just the server log saw heavy review this week. vignesh C reported a real defect: a concurrent <code>ALTER SUBSCRIPTION</code> that switches the conflict-log destination drops the log table while the apply worker still holds its cached OID, so <code>table_open()</code> fails, the worker exits (code 1), and the conflict record is logged <em>nowhere</em>; reviewers also flagged that arbitrary objects (extensions, collations, operators) can be created in <code>pg_conflict</code> and that <code>DROP</code> of the log table errors inconsistently with INSERT/UPDATE. <em>(vignesh C, Peter Smith, Shlok Kyal, Amit Kapila · pgsql-hackers)</em> <code>[patch posted]</code></li>
 </ul>
+<h2>CommitFest (open: PG20-1, #59)</h2>
+<ul>
+<li><strong>Balance (Jun 15–21):</strong> PG20-1 is in its collection phase (in-progress Jul 1–31) and saw net inflow — several new patch records, a few committed/withdrawn. This is the first week the digest tracks the CommitFest, so the week-over-week delta baseline starts now; absolute totals will be diffed from next run. <em>(source: per-CF activity log)</em></li>
+<li><strong>New this week:</strong> <strong><a href="https://commitfest.postgresql.org/59/6918/">Global temporary tables</a></strong> <em>(deanr)</em> — a fresh patch record for the long-requested GTT feature: tables whose definition is shared cluster-wide but whose rows and statistics stay private to each session (the SQL-standard / Oracle-style global temp table Postgres still lacks). Also new: <strong><a href="https://commitfest.postgresql.org/59/6916/">PROXY protocol support</a></strong> (#6916 — lets the backend see the real client address behind a load balancer) and <strong><a href="https://commitfest.postgresql.org/59/6915/">pg_dump: skip pg_init_privs entries for non-existent roles</a></strong> (#6915, Hüseyin Demir).</li>
+<li><strong>Closed in-window:</strong> <em>Fix PL/Python crash when a SRF is redefined mid-execution</em> (#6917, filed and committed same day by Tom Lane) and <em>Fix publisher-side sequence permission reporting</em> (#6911, committed); <em>pg_restore --no-globals output for pg_dumpall archives</em> (#6899) withdrawn.</li>
+</ul>
 <h2>Wider DBMS &amp; distributed data</h2>
 <ul>
 <li><strong><a href="https://www.youtube.com/watch?v=U3ssJlQAJuA">Why we built Azure HorizonDB for PostgreSQL</a></strong> — Dingding Lu (POSETTE) on Microsoft's new cloud-native, Postgres-compatible engine that decouples storage to keep latency predictable under spiky traffic and scale reads without external bolt-ons; a useful look at how a major vendor is re-architecting Postgres for the cloud. <em>(Microsoft · posetteconf.com)</em></li>
@@ -58,7 +64,7 @@
 <li><strong><a href="https://www.pghackers.com/">pghackers.com — PostgreSQL Hackers Explorer</a></strong> — AI-assisted search/exploration over the pgsql-hackers archive; potentially a faster way to triage in-window threads than the raw monthly index. <em>(surfaced via search; evaluate over coming weeks)</em></li>
 </ul>
 <hr />
-<p><em>8 items · sources scanned: ~30 (Planet PostgreSQL, PostgreSQL news archive, pgsql-hackers via mail-archive.com, pganalyze, thebuild.com, POSETTE, Qiita [ja], Habr [ru], modb.pro [zh], arXiv cs.DB) · international: 1 (ja) · filtered out as marketing/ads: ~6 (incl. recycled Crunchy↔Snowflake from 2025, vendor product talks). Community pulse, Research, and a ru/zh International item omitted: nothing could be confirmed inside the Jun 15–21 window without fabricating links or engagement counts.</em></p>]]></content:encoded>
+<p><em>11 items · sources scanned: ~31 (Planet PostgreSQL, PostgreSQL news archive, pgsql-hackers via mail-archive.com, CommitFest PG20-1 activity log, pganalyze, thebuild.com, POSETTE, Qiita [ja], Habr [ru], modb.pro [zh], arXiv cs.DB) · international: 1 (ja) · filtered out as marketing/ads: ~6 (incl. recycled Crunchy↔Snowflake from 2025, vendor product talks). Community pulse, Research, and a ru/zh International item omitted: nothing could be confirmed inside the Jun 15–21 window without fabricating links or engagement counts.</em></p>]]></content:encoded>
     </item>
     <item>
       <title>DBMS Weekly — 2026-06-14 (week of 2026-06-08–2026-06-14)</title>

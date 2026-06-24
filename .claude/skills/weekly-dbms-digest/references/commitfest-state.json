@@ -1,0 +1,25 @@
+{
+  "_comment": "Weekly snapshots of the OPEN CommitFest, used to compute week-over-week deltas. One object per ISO week (Monday date). Populated by the weekly-dbms-digest skill from the per-CF activity log.",
+  "weeks": [
+    {
+      "week": "2026-06-15",
+      "cf": "PG20-1 (#59)",
+      "captured_at": "2026-06-24",
+      "note": "First tracked week (baseline). Flow computed from the per-CF activity log /59/activity/; absolute total not captured (full list page skipped to save tokens). Week-over-week total deltas begin next run.",
+      "created": [
+        {"id": 6918, "title": "Global temporary tables", "by": "deanr", "date": "2026-06-21"},
+        {"id": 6917, "title": "Fix PL/Python crash when a SRF is redefined mid-execution", "by": "tgl", "date": "2026-06-21"},
+        {"id": 6916, "title": "PROXY protocol support", "by": "riouj", "date": "2026-06-20"},
+        {"id": 6915, "title": "pg_dump: skip pg_init_privs entries for non-existent roles", "by": "demir", "date": "2026-06-19"},
+        {"id": 6914, "title": "Fix out of bound access on embedded null token", "by": "aytiwari", "date": "2026-06-19"},
+        {"id": 6913, "title": "Tighten pg_uhc_verifychar() to enforce CP949 lead/trail byte ranges", "by": "dogeon", "date": "2026-06-19"}
+      ],
+      "closed": [
+        {"id": 6917, "title": "Fix PL/Python crash when a SRF is redefined mid-execution", "status": "Committed", "date": "2026-06-21"},
+        {"id": 6911, "title": "Fix publisher-side sequence permission reporting", "status": "Committed", "date": "2026-06-20"},
+        {"id": 6899, "title": "Fix pg_restore --no-globals SQL output for pg_dumpall archives", "status": "Withdrawn", "date": "2026-06-20"}
+      ],
+      "note_window": "Activity log covered Jun 18-21 in the page fetched; earlier in-window days (Jun 15-17) not enumerated this run."
+    }
+  ]
+}

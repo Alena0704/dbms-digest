@@ -110,6 +110,33 @@ didn't look, not that the list was quiet. Use whichever of these works this run:
 ```
 Tag with the list name in brackets and make the **thread subject the link** — to the thread root in the archive, not a specific reply (unless a specific reply is the event). Add the key person (proposer / committer / reporter) in italics after the line, e.g. `*(Jeff Davis · pgsql-hackers)*`. Append `[committed]`, `[rejected]`, `[patch posted]`, `[needs review]`, or `[open]` to show where things stand.
 
+### 3b. Open CommitFest balance (PostgreSQL development pulse)
+
+Track the open CommitFest every run — it is the clearest single signal of where core
+development is heading, and it must not be skipped. **Do NOT fetch the full CF list page**
+(`/<n>/` is ~180 KB, usually overflows the fetch limit, and has no totals anyway). Instead:
+
+1. Fetch `https://commitfest.postgresql.org/` to find the **open** CF and its number
+   (e.g. *Open: PG20-1* → `https://commitfest.postgresql.org/59/`).
+2. Fetch the **per-CF activity log** `https://commitfest.postgresql.org/<n>/activity/`. It is
+   small, dated, and current — note that the *global* `/activity/` page is often served stale
+   from cache, but the **per-CF** one is fresh. Each row is `time · user · patch · activity`.
+3. From the rows inside this digest's Mon–Sun window, compute the week's **flow**:
+   `Created patch record` = new entries; `Closed … Committed/Withdrawn/Rejected/Returned with
+   feedback` = entries leaving; also note `New status: Ready for Committer` promotions.
+   Net balance = created − closed.
+4. **Persist a snapshot** to `references/commitfest-state.json` (one object per ISO week:
+   `{week, cf, captured_at, created:[{id,title,by}], closed:[{id,title,status}], net}`).
+   Each run, diff against the previous week's object so the digest can state how the balance
+   moved week over week. Commit this file with the digest.
+5. Pick the **single most interesting new entry** and summarise its gist in one line — read its
+   linked mail thread if the title isn't self-explanatory. Prefer internals features
+   (planner, storage, replication, executor) over trivial doc/typo patches.
+
+The first run has no prior snapshot, so report the week's flow and say the week-over-week
+baseline starts now — never invent a previous-week total. If the activity page only covers part
+of the window, say so rather than implying a complete count.
+
 ### 4. Scan community discussion — the “Community pulse”
 
 Read `references/community-sources.md` and scan the **scannable** community sources (the `[public]` / `[js]` ones) for the time window: forums and link aggregators (Hacker News, Lobsters), the database subreddits, Q&A hot lists (DBA Stack Exchange), and any pinned public Telegram channels. The goal is **what people actually argued about this week**, ranked by real engagement (HN points + comments, Reddit upvotes + comments, SE votes/answers) — not by mere existence.
@@ -176,6 +203,11 @@ Use the exact format below. Keep each line to roughly one sentence — the value
 - **[hackers] [<Thread subject>](archive URL)** — <one line: what was proposed/found/decided>. *(<proposer>)* `[patch posted]`
 - **[bugs] [<Thread subject>](archive URL)** — <one line: confirmed bug or regression>. *(<reporter>)* `[open]`
 - ...
+
+## CommitFest (open: <CF name>)
+- **Balance (<window>):** <N> new · <M> closed (<x> committed / <y> withdrawn) → net <±k>. *(vs last week: <±delta>, or “baseline — tracking starts this week”)*
+- **New this week:** **[<standout title>](CF URL)** *(author)* — <one-line gist>; also <title> (#id), <title> (#id).
+- **Closed:** <title> (#id, committed), <title> (#id, withdrawn).
 
 ## Community pulse
 - **[<What people were arguing about>](thread URL)** — <one line on the debate / war story / surprise and where it landed>. *(<platform> · <N pts / comments>)*
