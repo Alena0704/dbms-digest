@@ -100,6 +100,14 @@ export const className = `
 
 const esc = (s) => String(s == null ? "" : s);
 
+// Last live build time (unix seconds → "YYYY-MM-DD HH:MM", local) for the header.
+const fmtBuilt = (ts) => {
+  if (!ts) return "";
+  const d = new Date(ts * 1000);
+  const p = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+};
+
 // ✨ button → Claude summary of one item (Übersicht runs the script via run()).
 const SUMMARIZE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/summarize.py";
 const CACHE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.widget-live-cache.json";
@@ -196,7 +204,7 @@ export const render = ({ output }) => {
       <style dangerouslySetInnerHTML={{ __html: rules.join("\n") }} />
       <h1>DBMS Digest
         <span className="dbw-refresh" onClick={doRefresh} title="Обновить сейчас (свежий пересбор)">⟳</span>
-        <span className="upd">upd {esc(data.updated || "")}</span>
+        <span className="upd">обновлено {fmtBuilt(data.live_built) || esc(data.updated || "")}</span>
       </h1>
 
       {pins.some(hasFresh)
