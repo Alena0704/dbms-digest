@@ -47,6 +47,17 @@ FEEDS = {
     "https://habr.com/ru/hubs/postgresql/": "https://habr.com/ru/rss/hubs/postgresql/articles/?fl=ru",
     "https://habr.com/ru/hubs/nosql/": "https://habr.com/ru/rss/hubs/nosql/articles/?fl=ru",
     "https://arxiv.org/list/cs.DB/recent": "http://export.arxiv.org/api/query?search_query=cat:cs.DB&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    # arXiv topic searches: human search page (click-through) → dated API query (the feed).
+    "https://arxiv.org/search/?searchtype=all&query=postgresql": "http://export.arxiv.org/api/query?search_query=cat:cs.DB+AND+all:postgresql&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/search/?searchtype=all&query=nosql": "http://export.arxiv.org/api/query?search_query=cat:cs.DB+AND+all:nosql&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/search/?searchtype=all&query=distributed+database": "http://export.arxiv.org/api/query?search_query=cat:cs.DB+AND+all:distributed&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/list/cs.LG/recent": "http://export.arxiv.org/api/query?search_query=cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/search/?searchtype=all&query=database+machine+learning": "http://export.arxiv.org/api/query?search_query=cat:cs.DB+AND+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/search/?searchtype=all&query=database+benchmark": "http://export.arxiv.org/api/query?search_query=all:benchmark+AND+cat:cs.DB&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/list/cs.LO/recent": "http://export.arxiv.org/api/query?search_query=cat:cs.LO&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/list/cs.DS/recent": "http://export.arxiv.org/api/query?search_query=cat:cs.DS&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/list/stat.ML/recent": "http://export.arxiv.org/api/query?search_query=cat:stat.ML&sortBy=submittedDate&sortOrder=descending&max_results=15",
+    "https://arxiv.org/list/math.NA/recent": "http://export.arxiv.org/api/query?search_query=cat:math.NA&sortBy=submittedDate&sortOrder=descending&max_results=15",
     "https://qiita.com/tags/postgresql": "https://qiita.com/tags/postgresql/feed",
     "https://www.crunchydata.com/blog": "https://www.crunchydata.com/blog/rss.xml",
     "https://www.enterprisedb.com/blog": "https://www.enterprisedb.com/blog/rss.xml",
@@ -351,7 +362,7 @@ def main() -> None:
             # In "research", split mixed blogs by relevance: keep papers, drop personal posts.
             if type_id == "research":
                 merged = [m for m in merged
-                          if m["_feed"] in ALWAYS_RESEARCH or RESEARCH_RE.search(m["t"])]
+                          if "export.arxiv.org" in m.get("_feed", "") or RESEARCH_RE.search(m["t"])]
             merged.sort(key=lambda x: x["_ts"], reverse=True)
             # Variety: take at most CELL_PER_SRC from one source first, then backfill with the
             # rest — so a prolific feed can't monopolize the top of the cell.

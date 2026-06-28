@@ -1,6 +1,6 @@
 {
-  "updated": "2026-06-28",
-  "note": "Curated source launcher. Edit freely: move items between cells, add/remove sources. Each item = {t: title, u: url}. 'pins' = always-visible quick tags for key channels.",
+  "updated": "2026-06-29",
+  "note": "Curated source launcher. Edit freely: move items between cells, add/remove sources. Each item = {t: title, u: url}. 'pins' = always-visible quick tags. arXiv search-page URLs are mapped to dated API queries in build_widget_items.py (FEEDS).",
   "pins": [
     { "t": "#pgsql-hackers", "u": "https://www.postgresql.org/list/pgsql-hackers/" },
     { "t": "#pgsql-bugs", "u": "https://www.postgresql.org/list/pgsql-bugs/" },
@@ -11,9 +11,9 @@
     { "t": "#planet", "u": "https://planet.postgresql.org/" },
     { "t": "#news", "u": "https://www.postgresql.org/about/newsarchive/" },
     { "t": "#habr", "u": "https://habr.com/ru/hubs/postgresql/" },
-    { "t": "#arxiv-db", "u": "https://arxiv.org/list/cs.DB/recent" },
     { "t": "#HN-db", "u": "https://hn.algolia.com/?query=postgres" },
-    { "t": "#substack", "u": "https://substack.com/" }
+    { "t": "#substack", "u": "https://substack.com/" },
+    { "t": "#benchmarks", "u": "https://arxiv.org/search/?searchtype=all&query=database+benchmark" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },
@@ -35,12 +35,11 @@
           { "t": "Habr · PostgreSQL [ru]", "u": "https://habr.com/ru/hubs/postgresql/" }
         ],
         "research": [
-          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "arXiv · Postgres", "u": "https://arxiv.org/search/?searchtype=all&query=postgresql" },
           { "t": "The VLDB Journal", "u": "https://link.springer.com/journal/778" },
           { "t": "ACM SIGMOD Record", "u": "https://sigmodrecord.org/" },
           { "t": "pgsql-hackers (design)", "u": "https://www.postgresql.org/list/pgsql-hackers/" },
           { "t": "CommitFest", "u": "https://commitfest.postgresql.org/" },
-          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
           { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
         ],
         "company": [
@@ -81,15 +80,15 @@
           { "t": "DB Weekly", "u": "https://dbweekly.com/" }
         ],
         "research": [
-          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "arXiv · NoSQL", "u": "https://arxiv.org/search/?searchtype=all&query=nosql" },
           { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
           { "t": "CIDR", "u": "https://www.cidrdb.org/" },
           { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
         ],
         "company": [
-          { "t": "ScyllaDB blog (new)", "u": "https://www.scylladb.com/blog/" },
-          { "t": "MongoDB Engineering (new)", "u": "https://www.mongodb.com/blog/channel/engineering-blog" },
-          { "t": "Redis blog (new)", "u": "https://redis.io/blog/" }
+          { "t": "ScyllaDB blog", "u": "https://www.scylladb.com/blog/" },
+          { "t": "MongoDB Engineering", "u": "https://www.mongodb.com/blog/channel/engineering-blog" },
+          { "t": "Redis blog", "u": "https://redis.io/blog/" }
         ],
         "personal": [
           { "t": "Murat Demirbaş", "u": "https://muratbuffalo.blogspot.com/" },
@@ -108,11 +107,11 @@
           { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" }
         ],
         "research": [
+          { "t": "arXiv · Distributed DB", "u": "https://arxiv.org/search/?searchtype=all&query=distributed+database" },
           { "t": "CIDR", "u": "https://www.cidrdb.org/" },
           { "t": "VLDB / PVLDB", "u": "https://www.vldb.org/pvldb/" },
           { "t": "ACM SIGMOD", "u": "https://sigmod.org/" },
           { "t": "Andy Pavlo / CMU-DB", "u": "https://www.cs.cmu.edu/~pavlo/blog/" },
-          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
           { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
           { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
         ],
@@ -120,8 +119,8 @@
           { "t": "PingCAP / TiDB [zh]", "u": "https://cn.pingcap.com/blog/" },
           { "t": "OceanBase", "u": "https://www.oceanbase.com/" },
           { "t": "Alibaba Cloud · PolarDB [zh]", "u": "https://developer.aliyun.com/" },
-          { "t": "CockroachDB (new)", "u": "https://www.cockroachlabs.com/blog/" },
-          { "t": "YugabyteDB (new)", "u": "https://www.yugabyte.com/blog/" }
+          { "t": "CockroachDB", "u": "https://www.cockroachlabs.com/blog/" },
+          { "t": "YugabyteDB", "u": "https://www.yugabyte.com/blog/" }
         ],
         "personal": [
           { "t": "Daniel Abadi — DBMS Musings", "u": "https://dbmsmusings.blogspot.com/" },
@@ -191,17 +190,51 @@
       }
     },
     {
-      "id": "discovery", "label": "Поиск",
+      "id": "math", "label": "Math",
       "cells": {
         "news": [],
         "research": [
-          { "t": "Semantic Scholar", "u": "https://www.semanticscholar.org/" },
-          { "t": "CORE", "u": "https://core.ac.uk/" },
-          { "t": "BASE", "u": "https://www.base-search.net/" },
-          { "t": "DOAJ", "u": "https://doaj.org/" },
-          { "t": "MDPI · Mathematics", "u": "https://www.mdpi.com/journal/mathematics" },
-          { "t": "Google Scholar", "u": "https://scholar.google.com/" },
-          { "t": "WorldWideScience", "u": "https://worldwidescience.org/" }
+          { "t": "arXiv · Logic (cs.LO)", "u": "https://arxiv.org/list/cs.LO/recent" },
+          { "t": "arXiv · Statistics (stat.ML)", "u": "https://arxiv.org/list/stat.ML/recent" },
+          { "t": "arXiv · Linear algebra / numerical (math.NA)", "u": "https://arxiv.org/list/math.NA/recent" }
+        ],
+        "company": [],
+        "personal": [],
+        "articles": []
+      }
+    },
+    {
+      "id": "ai", "label": "AI",
+      "cells": {
+        "news": [],
+        "research": [
+          { "t": "arXiv · Machine Learning (cs.LG)", "u": "https://arxiv.org/list/cs.LG/recent" }
+        ],
+        "company": [],
+        "personal": [],
+        "articles": []
+      }
+    },
+    {
+      "id": "aidb", "label": "AI+DB",
+      "cells": {
+        "news": [],
+        "research": [
+          { "t": "arXiv · DB × ML", "u": "https://arxiv.org/search/?searchtype=all&query=database+machine+learning" }
+        ],
+        "company": [],
+        "personal": [],
+        "articles": []
+      }
+    },
+    {
+      "id": "algorithms", "label": "Algorithms",
+      "cells": {
+        "news": [
+          { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" }
+        ],
+        "research": [
+          { "t": "arXiv · Algorithms (cs.DS)", "u": "https://arxiv.org/list/cs.DS/recent" }
         ],
         "company": [],
         "personal": [],
