@@ -1,0 +1,194 @@
+{
+  "updated": "2026-06-28",
+  "note": "Curated source launcher. Edit freely: move items between cells, add/remove sources. Each item = {t: title, u: url}. 'pins' = always-visible quick tags for key channels.",
+  "pins": [
+    { "t": "#pgsql-hackers", "u": "https://www.postgresql.org/list/pgsql-hackers/" },
+    { "t": "#pgsql-bugs", "u": "https://www.postgresql.org/list/pgsql-bugs/" },
+    { "t": "#pgsql-perf", "u": "https://www.postgresql.org/list/pgsql-performance/" },
+    { "t": "#pgsql-events", "u": "https://www.postgresql.org/about/events/" },
+    { "t": "#commitfest", "u": "https://commitfest.postgresql.org/" },
+    { "t": "#git-commits", "u": "https://git.postgresql.org/gitweb/?p=postgresql.git" },
+    { "t": "#planet", "u": "https://planet.postgresql.org/" },
+    { "t": "#news", "u": "https://www.postgresql.org/about/newsarchive/" },
+    { "t": "#habr", "u": "https://habr.com/ru/hubs/postgresql/" },
+    { "t": "#arxiv-db", "u": "https://arxiv.org/list/cs.DB/recent" },
+    { "t": "#HN-db", "u": "https://hn.algolia.com/?query=postgres" }
+  ],
+  "types": [
+    { "id": "news",     "label": "Новости" },
+    { "id": "research", "label": "Ресёрч" },
+    { "id": "company",  "label": "Компании" },
+    { "id": "personal", "label": "Личные" },
+    { "id": "articles", "label": "Статьи" }
+  ],
+  "topics": [
+    {
+      "id": "postgres", "label": "Postgres",
+      "cells": {
+        "news": [
+          { "t": "Planet PostgreSQL", "u": "https://planet.postgresql.org/" },
+          { "t": "Postgres Weekly", "u": "https://postgresweekly.com/" },
+          { "t": "pganalyze · 5mins of Postgres", "u": "https://pganalyze.com/blog" },
+          { "t": "PostgreSQL News Archive", "u": "https://www.postgresql.org/about/newsarchive/" },
+          { "t": "Postgres Pro blog [ru]", "u": "https://postgrespro.ru/blog" },
+          { "t": "Habr · PostgreSQL [ru]", "u": "https://habr.com/ru/hubs/postgresql/" }
+        ],
+        "research": [
+          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "The VLDB Journal", "u": "https://link.springer.com/journal/778" },
+          { "t": "ACM SIGMOD Record", "u": "https://sigmodrecord.org/" },
+          { "t": "pgsql-hackers (design)", "u": "https://www.postgresql.org/list/pgsql-hackers/" },
+          { "t": "CommitFest", "u": "https://commitfest.postgresql.org/" },
+          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+        ],
+        "company": [
+          { "t": "Crunchy Data", "u": "https://www.crunchydata.com/blog" },
+          { "t": "pganalyze", "u": "https://pganalyze.com/blog" },
+          { "t": "EDB", "u": "https://www.enterprisedb.com/blog" },
+          { "t": "Timescale", "u": "https://www.timescale.com/blog" },
+          { "t": "Fujitsu Fastware", "u": "https://www.postgresql.fastware.com/blog" },
+          { "t": "Postgres.ai", "u": "https://postgres.ai/blog" },
+          { "t": "pgMustard", "u": "https://www.pgmustard.com/blog" },
+          { "t": "Stormatics", "u": "https://stormatics.tech/" },
+          { "t": "Dalibo [fr]", "u": "https://blog.dalibo.com/" },
+          { "t": "Cybertec [de]", "u": "https://www.cybertec-postgresql.com/" },
+          { "t": "SRA OSS [ja]", "u": "https://www.sraoss.co.jp/" }
+        ],
+        "personal": [
+          { "t": "Bruce Momjian", "u": "https://momjian.us/main/blogs/" },
+          { "t": "Haki Benita", "u": "https://hakibenita.com/" },
+          { "t": "Franck Pachot", "u": "https://dev.to/franckpachot" },
+          { "t": "Christophe Pettus · thebuild", "u": "https://thebuild.com/blog/" },
+          { "t": "boringsql (Radim Marek)", "u": "https://boringsql.com/" },
+          { "t": "justatheory (David Wheeler)", "u": "https://justatheory.com/" },
+          { "t": "modern-sql (Markus Winand)", "u": "https://modern-sql.com/" }
+        ],
+        "articles": [
+          { "t": "The Internals of PostgreSQL", "u": "https://www.interdb.jp/pg/" },
+          { "t": "awesome-database-learning", "u": "https://github.com/pingcap/awesome-database-learning" },
+          { "t": "CITForum · Данные [ru]", "u": "https://citforum.ru/database/" },
+          { "t": "Qiita · PostgreSQL [ja]", "u": "https://qiita.com/tags/postgresql" }
+        ]
+      }
+    },
+    {
+      "id": "nosql", "label": "NoSQL",
+      "cells": {
+        "news": [
+          { "t": "Habr · NoSQL [ru]", "u": "https://habr.com/ru/hubs/nosql/" },
+          { "t": "DB Weekly", "u": "https://dbweekly.com/" }
+        ],
+        "research": [
+          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "CIDR", "u": "https://www.cidrdb.org/" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+        ],
+        "company": [
+          { "t": "ScyllaDB blog (new)", "u": "https://www.scylladb.com/blog/" },
+          { "t": "MongoDB Engineering (new)", "u": "https://www.mongodb.com/blog/channel/engineering-blog" },
+          { "t": "Redis blog (new)", "u": "https://redis.io/blog/" }
+        ],
+        "personal": [
+          { "t": "Murat Demirbaş", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+        ],
+        "articles": [
+          { "t": "awesome-database-learning", "u": "https://github.com/pingcap/awesome-database-learning" }
+        ]
+      }
+    },
+    {
+      "id": "distributed", "label": "Distributed",
+      "cells": {
+        "news": [
+          { "t": "DB Weekly", "u": "https://dbweekly.com/" },
+          { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" }
+        ],
+        "research": [
+          { "t": "CIDR", "u": "https://www.cidrdb.org/" },
+          { "t": "VLDB / PVLDB", "u": "https://www.vldb.org/pvldb/" },
+          { "t": "ACM SIGMOD", "u": "https://sigmod.org/" },
+          { "t": "Andy Pavlo / CMU-DB", "u": "https://www.cs.cmu.edu/~pavlo/blog/" },
+          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+        ],
+        "company": [
+          { "t": "PingCAP / TiDB [zh]", "u": "https://cn.pingcap.com/blog/" },
+          { "t": "OceanBase", "u": "https://www.oceanbase.com/" },
+          { "t": "Alibaba Cloud · PolarDB [zh]", "u": "https://developer.aliyun.com/" },
+          { "t": "CockroachDB (new)", "u": "https://www.cockroachlabs.com/blog/" },
+          { "t": "YugabyteDB (new)", "u": "https://www.yugabyte.com/blog/" }
+        ],
+        "personal": [
+          { "t": "Daniel Abadi — DBMS Musings", "u": "https://dbmsmusings.blogspot.com/" },
+          { "t": "Murat Demirbaş", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "Andy Pavlo", "u": "https://www.cs.cmu.edu/~pavlo/blog/" }
+        ],
+        "articles": [
+          { "t": "The Morning Paper [archive]", "u": "https://blog.acolyer.org/" },
+          { "t": "awesome-database-learning", "u": "https://github.com/pingcap/awesome-database-learning" }
+        ]
+      }
+    },
+    {
+      "id": "engines", "label": "Engines",
+      "cells": {
+        "news": [
+          { "t": "DB Weekly", "u": "https://dbweekly.com/" }
+        ],
+        "research": [
+          { "t": "Oracle Optimizer blog", "u": "https://blogs.oracle.com/optimizer/" },
+          { "t": "Franck Pachot (cross-engine)", "u": "https://dev.to/franckpachot" }
+        ],
+        "company": [
+          { "t": "DuckDB", "u": "https://duckdb.org/news/" },
+          { "t": "MotherDuck", "u": "https://motherduck.com/blog/" },
+          { "t": "DoltHub", "u": "https://www.dolthub.com/blog/" },
+          { "t": "SQL Server (MS)", "u": "https://techcommunity.microsoft.com/category/sql-server/blog/sqlserver" },
+          { "t": "Oracle Database Insider", "u": "https://blogs.oracle.com/database/" },
+          { "t": "MySQL Server blog", "u": "https://dev.mysql.com/blog-archive/" },
+          { "t": "MariaDB Foundation", "u": "https://mariadb.org/" },
+          { "t": "Percona", "u": "https://www.percona.com/blog/" },
+          { "t": "AWS Database Blog", "u": "https://aws.amazon.com/blogs/database/" }
+        ],
+        "personal": [
+          { "t": "Franck Pachot (cross-engine)", "u": "https://dev.to/franckpachot" },
+          { "t": "modern-sql (Markus Winand)", "u": "https://modern-sql.com/" }
+        ],
+        "articles": [
+          { "t": "learn.microsoft · SQL Server archive", "u": "https://learn.microsoft.com/en-us/archive/blogs/" },
+          { "t": "Chinar Aliyev · Oracle CBO [archive]", "u": "https://chinaraliyev.wordpress.com/" }
+        ]
+      }
+    },
+    {
+      "id": "math", "label": "Math",
+      "cells": {
+        "news": [],
+        "research": [
+          { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
+          { "t": "The VLDB Journal", "u": "https://link.springer.com/journal/778" },
+          { "t": "ACM SIGMOD Record", "u": "https://sigmodrecord.org/" },
+          { "t": "Semantic Scholar", "u": "https://www.semanticscholar.org/" },
+          { "t": "CORE", "u": "https://core.ac.uk/" },
+          { "t": "DOAJ", "u": "https://doaj.org/" },
+          { "t": "MDPI · Mathematics", "u": "https://www.mdpi.com/journal/mathematics" },
+          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+        ],
+        "company": [],
+        "personal": [
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" },
+          { "t": "Murat Demirbaş", "u": "https://muratbuffalo.blogspot.com/" }
+        ],
+        "articles": [
+          { "t": "The Morning Paper [archive]", "u": "https://blog.acolyer.org/" },
+          { "t": "modern-sql · SQL standard", "u": "https://modern-sql.com/" }
+        ]
+      }
+    }
+  ]
+}
