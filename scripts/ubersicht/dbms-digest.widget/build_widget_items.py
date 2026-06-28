@@ -92,6 +92,10 @@ FEEDS = {
     "https://cloudberry.apache.org/blog": "https://cloudberry.apache.org/blog/rss.xml",
     # StarRocks — MPP OLAP/analytics engine, native blog feed.
     "https://www.starrocks.io/blog/": "https://www.starrocks.io/blog/rss.xml",
+    # Apache Iceberg — lakehouse table format; no blog RSS, use GitHub release notes.
+    "https://github.com/apache/iceberg/releases": "https://github.com/apache/iceberg/releases.atom",
+    # MySQL — Oracle blogs block RSS (403); use GitHub release notes instead.
+    "https://github.com/mysql/mysql-server/releases": "https://github.com/mysql/mysql-server/releases.atom",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.

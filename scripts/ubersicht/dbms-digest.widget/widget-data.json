@@ -19,7 +19,10 @@
     { "t": "#arenadata", "u": "https://habr.com/ru/companies/arenadata/articles/" },
     { "t": "#orion-soft", "u": "https://habr.com/ru/companies/orion_soft/articles/" },
     { "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" },
-    { "t": "#starrocks", "u": "https://www.starrocks.io/blog/" }
+    { "t": "#starrocks", "u": "https://www.starrocks.io/blog/" },
+    { "t": "#iceberg", "u": "https://github.com/apache/iceberg/releases" },
+    { "t": "#duckdb", "u": "https://duckdb.org/news/" },
+    { "t": "#mysql", "u": "https://github.com/mysql/mysql-server/releases" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },
@@ -160,11 +163,12 @@
           { "t": "DoltHub", "u": "https://www.dolthub.com/blog/" },
           { "t": "SQL Server (MS)", "u": "https://techcommunity.microsoft.com/category/sql-server/blog/sqlserver" },
           { "t": "Oracle Database Insider", "u": "https://blogs.oracle.com/database/" },
-          { "t": "MySQL Server blog", "u": "https://dev.mysql.com/blog-archive/" },
+          { "t": "MySQL Server (releases)", "u": "https://github.com/mysql/mysql-server/releases" },
           { "t": "MariaDB Foundation", "u": "https://mariadb.org/" },
           { "t": "Percona", "u": "https://www.percona.com/blog/" },
           { "t": "AWS Database Blog", "u": "https://aws.amazon.com/blogs/database/" },
-          { "t": "StarRocks", "u": "https://www.starrocks.io/blog/" }
+          { "t": "StarRocks", "u": "https://www.starrocks.io/blog/" },
+          { "t": "Apache Iceberg (releases)", "u": "https://github.com/apache/iceberg/releases" }
         ],
         "personal": [
           { "t": "Franck Pachot (cross-engine)", "u": "https://dev.to/franckpachot" },
