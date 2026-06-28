@@ -37,6 +37,9 @@ export const className = `
 
   h1 { margin: 0 0 10px; font-size: 15px; font-weight: 700; color: #fff; }
   h1 .upd { font-weight: 400; font-size: 11px; color: #7f93ad; margin-left: 6px; }
+  h1 .dbw-refresh { cursor: pointer; pointer-events: auto; color: #9ec5ff; font-size: 13px;
+                    margin-left: 8px; opacity: .65; }
+  h1 .dbw-refresh:hover { opacity: 1; }
 
   .dbw-pins { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
   .dbw-pins label, .dbw-pins a {
@@ -99,6 +102,11 @@ const esc = (s) => String(s == null ? "" : s);
 
 // ✨ button → Claude summary of one item (Übersicht runs the script via run()).
 const SUMMARIZE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/summarize.py";
+const CACHE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.widget-live-cache.json";
+// ⟳ button → drop the cache and force an immediate fresh rebuild + redraw.
+const doRefresh = () =>
+  run(`rm -f ${sh(CACHE)}; osascript -e 'tell application "Übersicht" to refresh'`)
+    .catch((err) => console.error("dbms-digest ⟳:", err));
 const sh = (s) => `'${String(s == null ? "" : s).replace(/'/g, "'\\''")}'`;
 // ✨ click → fill the per-item .dbw-sum box inline (with a ✕ to hide it).
 const doSummary = (e, it) => {
@@ -186,7 +194,10 @@ export const render = ({ output }) => {
   return (
     <div>
       <style dangerouslySetInnerHTML={{ __html: rules.join("\n") }} />
-      <h1>DBMS Digest<span className="upd">upd {esc(data.updated || "")}</span></h1>
+      <h1>DBMS Digest
+        <span className="dbw-refresh" onClick={doRefresh} title="Обновить сейчас (свежий пересбор)">⟳</span>
+        <span className="upd">upd {esc(data.updated || "")}</span>
+      </h1>
 
       {pins.some(hasFresh)
         ? <input className="dbw-r" type="radio" name="dbw-pin" id="dbw-pin-none" defaultChecked key="pr-none" />
