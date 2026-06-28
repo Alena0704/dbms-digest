@@ -13,7 +13,12 @@
     { "t": "#habr", "u": "https://habr.com/ru/hubs/postgresql/" },
     { "t": "#HN-db", "u": "https://hn.algolia.com/?query=postgres" },
     { "t": "#substack", "u": "https://substack.com/" },
-    { "t": "#benchmarks", "u": "https://arxiv.org/search/?searchtype=all&query=database+benchmark" }
+    { "t": "#benchmarks", "u": "https://arxiv.org/search/?searchtype=all&query=database+benchmark" },
+    { "t": "#postgrespro", "u": "https://habr.com/ru/companies/postgrespro/articles/" },
+    { "t": "#tantor", "u": "https://habr.com/ru/companies/tantor/articles/" },
+    { "t": "#arenadata", "u": "https://habr.com/ru/companies/arenadata/articles/" },
+    { "t": "#orion-soft", "u": "https://habr.com/ru/companies/orion_soft/articles/" },
+    { "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },
@@ -31,7 +36,7 @@
           { "t": "Postgres Weekly", "u": "https://postgresweekly.com/" },
           { "t": "pganalyze · 5mins of Postgres", "u": "https://pganalyze.com/blog" },
           { "t": "PostgreSQL News Archive", "u": "https://www.postgresql.org/about/newsarchive/" },
-          { "t": "Postgres Pro blog [ru]", "u": "https://postgrespro.ru/blog" },
+          { "t": "Postgres Pro blog [ru]", "u": "https://habr.com/ru/companies/postgrespro/articles/" },
           { "t": "Habr · PostgreSQL [ru]", "u": "https://habr.com/ru/hubs/postgresql/" }
         ],
         "research": [
@@ -53,7 +58,12 @@
           { "t": "Stormatics", "u": "https://stormatics.tech/" },
           { "t": "Dalibo [fr]", "u": "https://blog.dalibo.com/" },
           { "t": "Cybertec [de]", "u": "https://www.cybertec-postgresql.com/" },
-          { "t": "SRA OSS [ja]", "u": "https://www.sraoss.co.jp/" }
+          { "t": "SRA OSS [ja]", "u": "https://www.sraoss.co.jp/" },
+          { "t": "Postgres Pro [ru]", "u": "https://habr.com/ru/companies/postgrespro/articles/" },
+          { "t": "Tantor Labs [ru]", "u": "https://habr.com/ru/companies/tantor/articles/" },
+          { "t": "Arenadata [ru]", "u": "https://habr.com/ru/companies/arenadata/articles/" },
+          { "t": "Orion soft · Proxima DB [ru]", "u": "https://habr.com/ru/companies/orion_soft/articles/" },
+          { "t": "Apache Cloudberry", "u": "https://cloudberry.apache.org/blog" }
         ],
         "personal": [
           { "t": "Bruce Momjian", "u": "https://momjian.us/main/blogs/" },

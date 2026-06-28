@@ -83,6 +83,13 @@ FEEDS = {
     "https://mariadb.org/": "https://mariadb.org/feed/",
     "https://www.cockroachlabs.com/blog/": "https://www.cockroachlabs.com/blog/index.xml",
     "https://www.yugabyte.com/blog/": "https://www.yugabyte.com/blog/feed/",
+    # Russian PG-ecosystem vendors — via their Habr company blogs (no usable native RSS).
+    "https://habr.com/ru/companies/postgrespro/articles/": "https://habr.com/ru/rss/companies/postgrespro/articles/?fl=ru",
+    "https://habr.com/ru/companies/tantor/articles/": "https://habr.com/ru/rss/companies/tantor/articles/?fl=ru",
+    "https://habr.com/ru/companies/arenadata/articles/": "https://habr.com/ru/rss/companies/arenadata/articles/?fl=ru",
+    "https://habr.com/ru/companies/orion_soft/articles/": "https://habr.com/ru/rss/companies/orion_soft/articles/?fl=ru",
+    # Apache Cloudberry (incubating) — PostgreSQL-based MPP warehouse, native blog feed.
+    "https://cloudberry.apache.org/blog": "https://cloudberry.apache.org/blog/rss.xml",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.
