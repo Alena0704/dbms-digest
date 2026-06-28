@@ -1,12 +1,55 @@
-<div align="center">
+> 🍴 **This is [Alena Rybakina](https://github.com/Alena0704)'s fork of the original
+> [danolivo/dbms-digest](https://github.com/danolivo/dbms-digest).** It keeps the upstream weekly
+> digest and adds a macOS **Übersicht desktop widget** plus reading tools — described below.
 
-<img src="pics/banner.jpg" width="100%" alt="DBMS Digest — PostgreSQL & DBMS Internals. A weekly, ad-free, fact-checked roundup of PostgreSQL & wider DBMS internals. Weekly, Mon → Sun. Signal over sales.">
+## 🖥️ Desktop widget (added in this fork)
 
-</div>
+A live PostgreSQL / DBMS news panel for your Mac: topic tabs, expandable channel tags, a 🏠 Home
+feed across dozens of sources, and one-click **Claude summaries** that render inline.
+
+<p align="center">
+  <img src="pics/widget.png" width="440" alt="DBMS Digest — Übersicht desktop widget">
+</p>
+
+**What it does**
+- **Tabs** — Postgres / NoSQL / Distributed / Engines / Math, each split into
+  Новости / Ресёрч / Компании / Личные / Статьи.
+- **🏠 Home** — the 15 freshest items across all feeds, de-duplicated and balanced across sources.
+- **Tags** — `#pgsql-hackers` · `#pgsql-bugs` · `#commitfest` · `#pgsql-events` · `#planet` ·
+  `#habr` · `#git-commits` · `#HN-db` · `#arxiv-db` · `#substack` … click to expand their latest
+  items (live RSS + scrapers for channels without a feed).
+- **✨ inline summaries** — click ✨ on any item for a short Russian summary from Claude, shown
+  right under it. Runs on your **Claude subscription** via the bundled Claude Code CLI — no API key.
+- **⟳ refresh** and a **☑ автообновление** (hourly auto-refresh) toggle in the header.
+
+**Buttons & icons**
+
+| Control | What it does |
+|---|---|
+| **🏠 / topic tabs** (Postgres…) | switch the topic; the row below switches the type (Новости / Ресёрч / …) |
+| **#tag** (`#planet`, `#habr`, …) | click to expand that channel's latest items; **✕ свернуть** collapses it |
+| **✨** (next to an item) | generate a short Russian Claude summary inline, under the item |
+| **✕** (in a summary box) | hide that summary |
+| **⟳** (header) | refresh now — clear the cache and refetch immediately |
+| **☑ автообновление** (header) | toggle hourly auto-refresh on/off |
+| **обновлено …** (header) | timestamp of the last live rebuild |
+
+**How it works** — `index.jsx` runs `build_widget_items.py` (concurrent RSS fetch + page scrapers,
+cached ~90 min); ✨ runs `summarize.py` → `claude -p`. Full prerequisites, install, and
+customization are in
+**[scripts/ubersicht/dbms-digest.widget/README.md](scripts/ubersicht/dbms-digest.widget/README.md)**.
+
+Also added: a terminal reader (`scripts/show_digest.sh` → `digest`), a daily-refresh LaunchAgent,
+an always-latest `docs/latest.html` homepage, and an expanded source **catalog + taxonomy**.
 
 ---
 
-## Digests
+## 📅 The weekly digest <sub>· original project</sub>
+
+> Everything below is the upstream content from
+> [`danolivo/dbms-digest`](https://github.com/danolivo/dbms-digest), kept as-is in this fork.
+
+### Digests
 
 _Newest first._
 
