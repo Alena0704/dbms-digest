@@ -16,8 +16,13 @@ export const refreshFrequency = 60 * 60 * 1000; // hourly; the script caches ~90
 
 // Fetch fresh items + merge with the curated data, print JSON. First run hits the
 // network (~10-15s); the script caches, so later refreshes are instant.
-export const command =
-  `python3 "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/build_widget_items.py"`;
+// ── Configurable path ───────────────────────────────────────────────────────
+// Where this widget's repo lives. Defaults to ~/dbms-digest; the shell expands $HOME,
+// so it works for any user without editing. If your repo is elsewhere, change THIS ONE
+// LINE (then re-copy index.jsx into the Übersicht widgets folder).
+const BASE = "$HOME/dbms-digest/scripts/ubersicht/dbms-digest.widget";
+
+export const command = `python3 "${BASE}/build_widget_items.py"`;
 
 export const className = `
   top: 40px;
@@ -111,19 +116,18 @@ const fmtBuilt = (ts) => {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 };
 
-// ✨ button → Claude summary of one item (Übersicht runs the script via run()).
-const SUMMARIZE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/summarize.py";
-const CACHE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.widget-live-cache.json";
+// Single-quote a dynamic arg for the shell. Script/cache/flag paths use BASE double-quoted
+// (so $HOME expands); only user-data args (url/title) go through sh().
+const sh = (s) => `'${String(s == null ? "" : s).replace(/'/g, "'\\''")}'`;
+const REFRESH = `osascript -e 'tell application "Übersicht" to refresh'`;
 // ⟳ button → drop the cache and force an immediate fresh rebuild + redraw.
 const doRefresh = () =>
-  run(`rm -f ${sh(CACHE)}; osascript -e 'tell application "Übersicht" to refresh'`)
+  run(`rm -f "${BASE}/.widget-live-cache.json"; ${REFRESH}`)
     .catch((err) => console.error("dbms-digest ⟳:", err));
-const FLAG = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.autorefresh-off";
 // ☑/☐ toggle hourly auto-refresh by creating/removing the flag file, then redraw.
 const setAuto = (currentlyOn) =>
-  run(`${currentlyOn ? `touch ${sh(FLAG)}` : `rm -f ${sh(FLAG)}`}; osascript -e 'tell application "Übersicht" to refresh'`)
+  run(`${currentlyOn ? `touch "${BASE}/.autorefresh-off"` : `rm -f "${BASE}/.autorefresh-off"`}; ${REFRESH}`)
     .catch((err) => console.error("dbms-digest auto:", err));
-const sh = (s) => `'${String(s == null ? "" : s).replace(/'/g, "'\\''")}'`;
 // ✨ click → fill the per-item .dbw-sum box inline (with a ✕ to hide it).
 const doSummary = (e, it) => {
   const li = e.target && e.target.closest && e.target.closest("li");
@@ -142,7 +146,7 @@ const doSummary = (e, it) => {
   };
   box.style.display = "block";
   fill("⏳ выжимка…");
-  run(`DBMS_SUMMARY_INLINE=1 python3 ${sh(SUMMARIZE)} ${sh(it.u)} ${sh(it.t)}`)
+  run(`DBMS_SUMMARY_INLINE=1 python3 "${BASE}/summarize.py" ${sh(it.u)} ${sh(it.t)}`)
     .then((out) => fill((out || "").trim() || "(пусто)"))
     .catch((err) => fill("ошибка: " + err));
 };

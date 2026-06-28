@@ -24,10 +24,13 @@
     <string>com.dbmsdigest.daily</string>
 
     <key>ProgramArguments</key>
+    <!-- Run via a login shell so $HOME expands (launchd does NOT expand ~ or env vars).
+         Assumes the repo is at ~/dbms-digest; change the path if it lives elsewhere.
+         Append " &#45;&#45;no-open" inside the command to refresh without opening a browser tab. -->
     <array>
-        <string>/Users/alena/dbms-digest/scripts/refresh_digest.sh</string>
-        <!-- to refresh without popping a browser tab, uncomment: -->
-        <!-- <string>&#45;&#45;no-open</string> -->
+        <string>/bin/bash</string>
+        <string>-lc</string>
+        <string>"$HOME/dbms-digest/scripts/refresh_digest.sh"</string>
     </array>
 
     <key>RunAtLoad</key>

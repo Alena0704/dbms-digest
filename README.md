@@ -12,11 +12,11 @@ feed across dozens of sources, and one-click **Claude summaries** that render in
 </p>
 
 **What it does**
-- **Tabs** — Postgres / NoSQL / Distributed / Engines / Math, each split into
-  Новости / Ресёрч / Компании / Личные / Статьи.
+- **Tabs** — Postgres / NoSQL / Distributed / Engines / Theory / Math / AI / AI+DB / Algorithms,
+  each split into Новости / Ресёрч / Компании / Личные / Статьи.
 - **🏠 Home** — the 15 freshest items across all feeds, de-duplicated and balanced across sources.
 - **Tags** — `#pgsql-hackers` · `#pgsql-bugs` · `#commitfest` · `#pgsql-events` · `#planet` ·
-  `#habr` · `#git-commits` · `#HN-db` · `#arxiv-db` · `#substack` … click to expand their latest
+  `#habr` · `#git-commits` · `#HN-db` · `#benchmarks` · `#substack` … click to expand their latest
   items (live RSS + scrapers for channels without a feed).
 - **✨ inline summaries** — click ✨ on any item for a short Russian summary from Claude, shown
   right under it. Runs on your **Claude subscription** via the bundled Claude Code CLI — no API key.

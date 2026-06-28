@@ -32,7 +32,7 @@ Internet access is required (it pulls RSS/Atom feeds and scrapes a few pages).
    > ⚠️ A symlink breaks the widget's ES `import` (the module resolves from outside the widgets
    > dir) and the widget renders **blank**. Use a real copy.
    ```sh
-   cp -R "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget" \
+   cp -R "$HOME/dbms-digest/scripts/ubersicht/dbms-digest.widget" \
          "$HOME/Library/Application Support/Übersicht/widgets/"
    ```
 
@@ -103,7 +103,15 @@ The header shows **обновлено `<date> <time>`** — the real last-build 
 - **Noisy feed in Home:** add it to `HOME_EXCLUDE` (Qiita is already excluded).
 - **Research relevance filter:** tune `RESEARCH_RE` in the script.
 - **Size/position:** `width` / `top` / `right` in the `className` block of `index.jsx` (re-copy after).
-- **Repo moved?** update the absolute paths in `index.jsx` (`command`, `SUMMARIZE`, `CACHE`, `FLAG`)
-  and re-copy.
+- **Paths / portability:** every path derives from one parameter — `const BASE` at the top of
+  `index.jsx`, defaulting to `$HOME/dbms-digest/scripts/ubersicht/dbms-digest.widget`. The shell
+  expands `$HOME`, so **no username is hardcoded** and it works for any user whose repo is at
+  `~/dbms-digest`. If your repo lives elsewhere, change that one line and re-copy. The daily
+  LaunchAgent (`com.dbmsdigest.daily.plist`) runs through `bash -lc` so `$HOME` expands there too.
+- **No secrets in the code.** No API keys or tokens are stored — ✨ uses the Claude Code CLI (your
+  subscription), and nothing reads a key. Safe to publish.
+- **Show on one monitor:** Übersicht's per-widget screen setting (menu-bar icon, or
+  `~/Library/Application Support/tracesOf.Uebersicht/WidgetSettings.json` →
+  `showOnAllScreens`/`showOnMainScreen`).
 
-> `#arxiv-db` and the Ресёрч cells are thin on weekends — arXiv doesn't publish Sat/Sun; they fill on weekdays.
+> The arXiv-backed cells & tabs (Math / AI / Algorithms, Ресёрч) are thin on weekends — arXiv doesn't publish Sat/Sun; they fill on weekdays.
