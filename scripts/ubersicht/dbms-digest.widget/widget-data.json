@@ -18,7 +18,8 @@
     { "t": "#tantor", "u": "https://habr.com/ru/companies/tantor/articles/" },
     { "t": "#arenadata", "u": "https://habr.com/ru/companies/arenadata/articles/" },
     { "t": "#orion-soft", "u": "https://habr.com/ru/companies/orion_soft/articles/" },
-    { "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" }
+    { "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" },
+    { "t": "#starrocks", "u": "https://www.starrocks.io/blog/" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },
@@ -162,7 +163,8 @@
           { "t": "MySQL Server blog", "u": "https://dev.mysql.com/blog-archive/" },
           { "t": "MariaDB Foundation", "u": "https://mariadb.org/" },
           { "t": "Percona", "u": "https://www.percona.com/blog/" },
-          { "t": "AWS Database Blog", "u": "https://aws.amazon.com/blogs/database/" }
+          { "t": "AWS Database Blog", "u": "https://aws.amazon.com/blogs/database/" },
+          { "t": "StarRocks", "u": "https://www.starrocks.io/blog/" }
         ],
         "personal": [
           { "t": "Franck Pachot (cross-engine)", "u": "https://dev.to/franckpachot" },

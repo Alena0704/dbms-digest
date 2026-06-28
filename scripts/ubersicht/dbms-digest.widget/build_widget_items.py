@@ -90,6 +90,8 @@ FEEDS = {
     "https://habr.com/ru/companies/orion_soft/articles/": "https://habr.com/ru/rss/companies/orion_soft/articles/?fl=ru",
     # Apache Cloudberry (incubating) — PostgreSQL-based MPP warehouse, native blog feed.
     "https://cloudberry.apache.org/blog": "https://cloudberry.apache.org/blog/rss.xml",
+    # StarRocks — MPP OLAP/analytics engine, native blog feed.
+    "https://www.starrocks.io/blog/": "https://www.starrocks.io/blog/rss.xml",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.
