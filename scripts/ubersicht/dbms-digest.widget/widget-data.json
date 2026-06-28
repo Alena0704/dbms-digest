@@ -166,29 +166,46 @@
       }
     },
     {
-      "id": "math", "label": "Math",
+      "id": "theory", "label": "Theory",
       "cells": {
         "news": [],
         "research": [
           { "t": "arXiv cs.DB", "u": "https://arxiv.org/list/cs.DB/recent" },
-          { "t": "The VLDB Journal", "u": "https://link.springer.com/journal/778" },
+          { "t": "CIDR", "u": "https://www.cidrdb.org/" },
           { "t": "ACM SIGMOD Record", "u": "https://sigmodrecord.org/" },
-          { "t": "Semantic Scholar", "u": "https://www.semanticscholar.org/" },
-          { "t": "CORE", "u": "https://core.ac.uk/" },
-          { "t": "DOAJ", "u": "https://doaj.org/" },
-          { "t": "MDPI · Mathematics", "u": "https://www.mdpi.com/journal/mathematics" },
-          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" },
-          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" }
+          { "t": "The VLDB Journal", "u": "https://link.springer.com/journal/778" },
+          { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" },
+          { "t": "Murat Demirbaş — paper reviews", "u": "https://muratbuffalo.blogspot.com/" }
         ],
         "company": [],
         "personal": [
           { "t": "DBMS Musings (Daniel Abadi)", "u": "https://dbmsmusings.blogspot.com/" },
+          { "t": "modern-sql (Markus Winand)", "u": "https://modern-sql.com/" },
           { "t": "Murat Demirbaş", "u": "https://muratbuffalo.blogspot.com/" }
         ],
         "articles": [
           { "t": "The Morning Paper [archive]", "u": "https://blog.acolyer.org/" },
-          { "t": "modern-sql · SQL standard", "u": "https://modern-sql.com/" }
+          { "t": "modern-sql · SQL standard", "u": "https://modern-sql.com/" },
+          { "t": "awesome-database-learning", "u": "https://github.com/pingcap/awesome-database-learning" }
         ]
+      }
+    },
+    {
+      "id": "discovery", "label": "Поиск",
+      "cells": {
+        "news": [],
+        "research": [
+          { "t": "Semantic Scholar", "u": "https://www.semanticscholar.org/" },
+          { "t": "CORE", "u": "https://core.ac.uk/" },
+          { "t": "BASE", "u": "https://www.base-search.net/" },
+          { "t": "DOAJ", "u": "https://doaj.org/" },
+          { "t": "MDPI · Mathematics", "u": "https://www.mdpi.com/journal/mathematics" },
+          { "t": "Google Scholar", "u": "https://scholar.google.com/" },
+          { "t": "WorldWideScience", "u": "https://worldwidescience.org/" }
+        ],
+        "company": [],
+        "personal": [],
+        "articles": []
       }
     }
   ]
