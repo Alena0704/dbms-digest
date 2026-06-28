@@ -29,8 +29,19 @@ from xml.sax.saxutils import escape
 import markdown
 
 # --- configuration ----------------------------------------------------------
-SITE = "https://danolivo.github.io/dbms-digest"          # GitHub Pages site root
-REPO = "https://github.com/danolivo/dbms-digest"         # source repo
+# GitHub account + repo that publish this site. To run your own copy under a
+# different account, set the env vars once (e.g. in your shell or CI):
+#     DIGEST_OWNER=alena0704 python3 scripts/build_feed.py
+# Everything below (feed URLs, canonical links, footer) is derived from these,
+# so there's nothing else to change.
+import os
+
+OWNER = os.environ.get("DIGEST_OWNER", "danolivo")       # GitHub username
+REPO_NAME = os.environ.get("DIGEST_REPO_NAME", "dbms-digest")
+
+SITE = f"https://{OWNER.lower()}.github.io/{REPO_NAME}"   # GitHub Pages site root
+REPO = f"https://github.com/{OWNER}/{REPO_NAME}"          # source repo
+SITE_HOST = f"{OWNER.lower()}.github.io"                  # bare host for feed:// links
 FEED_TITLE = "DBMS Digest"
 SITE_TITLE = "DBMS Digest — weekly PostgreSQL & database internals roundup"
 FEED_DESC = ("A weekly, ad-free, fact-checked roundup of PostgreSQL & wider DBMS "
@@ -325,7 +336,7 @@ def build_index(items: list[tuple[dt.date, Path]]) -> str:
 
     <p class="sublabel">Subscribe</p>
     <p class="lead">{html.escape(FEED_DESC)}</p>
-    <a class="sub" href="feed://danolivo.github.io/dbms-digest/feed.xml">\U0001F4E1 Subscribe via RSS</a>
+    <a class="sub" href="feed://{SITE_HOST}/{REPO_NAME}/feed.xml">\U0001F4E1 Subscribe via RSS</a>
     <span class="feedurl">Or paste this into your reader: <code>{SITE}/feed.xml</code></span>
 
     <p class="index-h">All digests</p>
@@ -334,7 +345,7 @@ def build_index(items: list[tuple[dt.date, Path]]) -> str:
     </ul>
 
     <footer>
-      Generated from <a href="{REPO}">github.com/danolivo/dbms-digest</a>.
+      Generated from <a href="{REPO}">github.com/{OWNER}/{REPO_NAME}</a>.
       Signal over sales.
     </footer>
   </div>
@@ -366,6 +377,18 @@ def main() -> None:
     (DOCS / ".nojekyll").write_text("", encoding="utf-8")
     for monday, path in items:
         (DOCS / page_rel(monday)).write_text(build_digest_page(monday, path), encoding="utf-8")
+
+    # Stable "always newest" entry point. Set a browser homepage / Mac shortcut to this URL
+    # (local file or the published site) and it always lands on the freshest digest.
+    if items:
+        newest = page_rel(items[0][0])
+        (DOCS / "latest.html").write_text(
+            '<!DOCTYPE html><meta charset="utf-8">'
+            '<title>DBMS Digest — latest</title>'
+            f'<meta http-equiv="refresh" content="0; url={newest}">'
+            f'<link rel="canonical" href="{SITE}/{newest}">'
+            f'<body style="font:16px system-ui;padding:2rem">Opening the latest digest… '
+            f'<a href="{newest}">open it</a>.</body>', encoding="utf-8")
 
     # SEO / discovery assets
     (DOCS / "sitemap.xml").write_text(build_sitemap(items), encoding="utf-8")

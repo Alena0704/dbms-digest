@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  LaunchAgent: rebuild the local DBMS-digest site once a day and at login.
+
+  Install (run these yourself — they touch your system, so they're not automated):
+
+    cp scripts/com.dbmsdigest.daily.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.dbmsdigest.daily.plist
+
+  Uninstall:
+
+    launchctl unload ~/Library/LaunchAgents/com.dbmsdigest.daily.plist
+    rm ~/Library/LaunchAgents/com.dbmsdigest.daily.plist
+
+  Notes:
+   * RunAtLoad opens the latest digest in your browser at login. To refresh
+     silently instead, add the <string>--no-open</string> argument below.
+   * StartCalendarInterval re-runs it daily at 09:00 (change Hour/Minute to taste).
+   * Requires the `markdown` Python module: pip3 install markdown
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.dbmsdigest.daily</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/alena/dbms-digest/scripts/refresh_digest.sh</string>
+        <!-- to refresh without popping a browser tab, uncomment: -->
+        <!-- <string>&#45;&#45;no-open</string> -->
+    </array>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>9</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/tmp/dbmsdigest.daily.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/dbmsdigest.daily.err</string>
+</dict>
+</plist>
