@@ -5,3 +5,4 @@
 .widget-live-cache.json
 __pycache__/
 *.pyc
+.autorefresh-off

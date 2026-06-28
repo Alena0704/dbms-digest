@@ -22,7 +22,7 @@ export const command =
 export const className = `
   top: 40px;
   right: 40px;
-  width: 460px;
+  width: 920px;
   box-sizing: border-box;
   padding: 16px 18px 18px;
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
@@ -40,6 +40,9 @@ export const className = `
   h1 .dbw-refresh { cursor: pointer; pointer-events: auto; color: #9ec5ff; font-size: 13px;
                     margin-left: 8px; opacity: .65; }
   h1 .dbw-refresh:hover { opacity: 1; }
+  h1 .dbw-auto { cursor: pointer; pointer-events: auto; font-size: 11px; font-weight: 400;
+                 color: #7f93ad; margin-left: 12px; }
+  h1 .dbw-auto:hover { color: #cfe0f4; }
 
   .dbw-pins { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
   .dbw-pins label, .dbw-pins a {
@@ -115,6 +118,11 @@ const CACHE = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.wi
 const doRefresh = () =>
   run(`rm -f ${sh(CACHE)}; osascript -e 'tell application "Übersicht" to refresh'`)
     .catch((err) => console.error("dbms-digest ⟳:", err));
+const FLAG = "/Users/alena/dbms-digest/scripts/ubersicht/dbms-digest.widget/.autorefresh-off";
+// ☑/☐ toggle hourly auto-refresh by creating/removing the flag file, then redraw.
+const setAuto = (currentlyOn) =>
+  run(`${currentlyOn ? `touch ${sh(FLAG)}` : `rm -f ${sh(FLAG)}`}; osascript -e 'tell application "Übersicht" to refresh'`)
+    .catch((err) => console.error("dbms-digest auto:", err));
 const sh = (s) => `'${String(s == null ? "" : s).replace(/'/g, "'\\''")}'`;
 // ✨ click → fill the per-item .dbw-sum box inline (with a ✕ to hide it).
 const doSummary = (e, it) => {
@@ -205,6 +213,10 @@ export const render = ({ output }) => {
       <h1>DBMS Digest
         <span className="dbw-refresh" onClick={doRefresh} title="Обновить сейчас (свежий пересбор)">⟳</span>
         <span className="upd">обновлено {fmtBuilt(data.live_built) || esc(data.updated || "")}</span>
+        <span className="dbw-auto" onClick={() => setAuto(!!data.autorefresh)}
+              title="Автообновление новостей раз в час">
+          {data.autorefresh ? "☑" : "☐"} автообновление
+        </span>
       </h1>
 
       {pins.some(hasFresh)

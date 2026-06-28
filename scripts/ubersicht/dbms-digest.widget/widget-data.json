@@ -12,7 +12,8 @@
     { "t": "#news", "u": "https://www.postgresql.org/about/newsarchive/" },
     { "t": "#habr", "u": "https://habr.com/ru/hubs/postgresql/" },
     { "t": "#arxiv-db", "u": "https://arxiv.org/list/cs.DB/recent" },
-    { "t": "#HN-db", "u": "https://hn.algolia.com/?query=postgres" }
+    { "t": "#HN-db", "u": "https://hn.algolia.com/?query=postgres" },
+    { "t": "#substack", "u": "https://substack.com/" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },

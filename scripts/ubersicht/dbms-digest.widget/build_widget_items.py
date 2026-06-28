@@ -26,7 +26,9 @@ from xml.etree import ElementTree as ET
 HERE = Path(__file__).resolve().parent
 DATA = HERE / "widget-data.json"
 CACHE = HERE / ".widget-live-cache.json"
+FLAG_OFF = HERE / ".autorefresh-off"   # presence = hourly auto-refresh is OFF
 CACHE_TTL = 90 * 60          # seconds
+AUTO_TTL = 55 * 60           # auto-refresh ON: the hourly tick refetches once cache is older than this
 PER_CELL = 15                # max fresh items shown per cell / pin
 CELL_PER_SRC = 3             # per-cell: show at most N from one source first, for variety
 HOME_N = 15                  # items on the Home tab
@@ -238,6 +240,37 @@ def scrape_hn():
     return out
 
 
+SUBSTACK_URLS = {"https://substack.com/"}
+# CS + databases Substack newsletters (each has /feed). Broken ones are skipped.
+SUBSTACK_FEEDS = [
+    ("VuTrinh", "https://vutr.substack.com/feed"),
+    ("ByteByteGo", "https://blog.bytebytego.com/feed"),
+    ("Pragmatic Eng", "https://newsletter.pragmaticengineer.com/feed"),
+    ("Data Eng Weekly", "https://www.dataengineeringweekly.com/feed"),
+    ("Materialized View", "https://materializedview.io/feed"),
+    ("Benn Stancil", "https://benn.substack.com/feed"),
+]
+
+
+def scrape_substack():
+    """Merge several CS/DB Substack feeds, newest first, capped per source for variety."""
+    rows = []
+    for name, url in SUBSTACK_FEEDS:
+        for (t, link, ts) in fetch_feed(url):
+            rows.append((ts, t, link, name))
+    rows.sort(key=lambda r: r[0], reverse=True)
+    out, per, seen = [], {}, set()
+    for ts, t, link, name in rows:
+        if link in seen or per.get(name, 0) >= CELL_PER_SRC:
+            continue
+        seen.add(link)
+        per[name] = per.get(name, 0) + 1
+        out.append({"t": t, "u": link, "src": name})
+        if len(out) >= PER_CELL:
+            break
+    return out
+
+
 COMMITFEST_URLS = {"https://commitfest.postgresql.org/"}
 
 
@@ -269,8 +302,13 @@ def short_src(title: str) -> str:
 
 
 def main() -> None:
-    if CACHE.exists() and (time.time() - CACHE.stat().st_mtime) < CACHE_TTL:
-        print(CACHE.read_text(encoding="utf-8"))
+    auto_on = not FLAG_OFF.exists()
+    age = (time.time() - CACHE.stat().st_mtime) if CACHE.exists() else 1e9
+    # auto-refresh OFF → always serve cache (until a manual ⟳ clears it); ON → serve until AUTO_TTL.
+    if CACHE.exists() and (not auto_on or age < AUTO_TTL):
+        cached = json.loads(CACHE.read_text(encoding="utf-8"))
+        cached["autorefresh"] = auto_on          # reflect the live flag, not the cached value
+        print(json.dumps(cached, ensure_ascii=False))
         return
 
     data = json.loads(DATA.read_text(encoding="utf-8"))
@@ -343,6 +381,9 @@ def main() -> None:
         if pu in HN_URLS:
             p["fresh"] = [{"t": t, "u": u, "sub": s} for (t, u, s) in scrape_hn()]
             continue
+        if pu in SUBSTACK_URLS:
+            p["fresh"] = scrape_substack()
+            continue
         feed = FEEDS.get(pu)
         if not feed:
             continue
@@ -384,6 +425,7 @@ def main() -> None:
             break
     data["home"] = home_top
 
+    data["autorefresh"] = auto_on
     data["live_built"] = int(time.time())
     out = json.dumps(data, ensure_ascii=False)
     try:
