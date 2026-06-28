@@ -21,11 +21,31 @@
       <outline type="rss" text="r/PostgreSQL [browser]" xmlUrl="https://www.reddit.com/r/PostgreSQL/.rss"/>
       <outline type="rss" text="r/databasedevelopment [browser]" xmlUrl="https://www.reddit.com/r/databasedevelopment/.rss"/>
     </outline>
+    <outline text="Vendor blogs (English) - filter marketing hard">
+      <!-- EDB = "The Postgres Builders Blog". Plain-fetch [ok] (verified 2026-06-28), but
+           heavily marketing-skewed (AI/sovereignty/product PR); keep only genuine internals,
+           HA, and migration write-ups per the anti-marketing rule. -->
+      <outline type="rss" text="EDB blog [ok - marketing-heavy, filter]" xmlUrl="https://www.enterprisedb.com/blog/rss.xml"/>
+    </outline>
+    <outline text="Engines (English) - DuckDB / MariaDB family">
+      <!-- All three plain-fetch [ok] (verified 2026-06-28). DuckDB = substantive engineering
+           (releases, vectorized exec, Iceberg). MotherDuck + MariaDB.org mix engineering with
+           sponsor/product PR - filter marketing. -->
+      <outline type="rss" text="DuckDB blog [ok]" xmlUrl="https://duckdb.org/feed.xml"/>
+      <outline type="rss" text="MotherDuck blog [ok - filter marketing]" xmlUrl="https://motherduck.com/rss.xml"/>
+      <outline type="rss" text="MariaDB Foundation [ok - filter sponsor/PR]" xmlUrl="https://mariadb.org/feed/"/>
+    </outline>
     <outline text="Research">
       <outline type="rss" text="arXiv cs.DB [ok]" xmlUrl="https://rss.arxiv.org/rss/cs.DB"/>
     </outline>
     <outline text="Russian [ru]">
+      <!-- Scan Habr at HUB granularity, not the firehose: habr.com/ru/{news,articles,posts}/ is
+           all-topic IT noise (~0 DB). These four DB hubs are dense + plain-fetch [ok] (2026-06-28).
+           Articles cross-tagged across hubs (e.g. SQL+MySQL) will duplicate - dedupe on title/URL. -->
       <outline type="rss" text="Habr - PostgreSQL hub [ok]" xmlUrl="https://habr.com/ru/rss/hubs/postgresql/articles/?fl=ru"/>
+      <outline type="rss" text="Habr - SQL hub [ok]" xmlUrl="https://habr.com/ru/rss/hubs/sql/articles/?fl=ru"/>
+      <outline type="rss" text="Habr - MySQL hub [ok]" xmlUrl="https://habr.com/ru/rss/hubs/mysql/articles/?fl=ru"/>
+      <outline type="rss" text="Habr - NoSQL hub [ok]" xmlUrl="https://habr.com/ru/rss/hubs/nosql/articles/?fl=ru"/>
     </outline>
     <outline text="Japanese [ja]">
       <outline type="rss" text="Qiita - PostgreSQL tag [ok]" xmlUrl="https://qiita.com/tags/postgresql/feed"/>
