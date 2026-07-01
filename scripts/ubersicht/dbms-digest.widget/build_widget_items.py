@@ -96,6 +96,8 @@ FEEDS = {
     "https://github.com/apache/iceberg/releases": "https://github.com/apache/iceberg/releases.atom",
     # MySQL — Oracle blogs block RSS (403); use GitHub release notes instead.
     "https://github.com/mysql/mysql-server/releases": "https://github.com/mysql/mysql-server/releases.atom",
+    # SPQR (pg-sharding) — PostgreSQL sharding router; follow commit activity.
+    "https://github.com/pg-sharding/spqr": "https://github.com/pg-sharding/spqr/commits/master.atom",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.

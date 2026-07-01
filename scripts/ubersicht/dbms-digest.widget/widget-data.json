@@ -22,7 +22,8 @@
     { "t": "#starrocks", "u": "https://www.starrocks.io/blog/" },
     { "t": "#iceberg", "u": "https://github.com/apache/iceberg/releases" },
     { "t": "#duckdb", "u": "https://duckdb.org/news/" },
-    { "t": "#mysql", "u": "https://github.com/mysql/mysql-server/releases" }
+    { "t": "#mysql", "u": "https://github.com/mysql/mysql-server/releases" },
+    { "t": "#spqr", "u": "https://github.com/pg-sharding/spqr" }
   ],
   "types": [
     { "id": "news",     "label": "Новости" },
@@ -118,7 +119,8 @@
       "cells": {
         "news": [
           { "t": "DB Weekly", "u": "https://dbweekly.com/" },
-          { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" }
+          { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" },
+          { "t": "SPQR · pg-sharding (commits)", "u": "https://github.com/pg-sharding/spqr" }
         ],
         "research": [
           { "t": "arXiv · Distributed DB", "u": "https://arxiv.org/search/?searchtype=all&query=distributed+database" },
