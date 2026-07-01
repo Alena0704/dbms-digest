@@ -108,6 +108,8 @@ FEEDS = {
     "https://github.com/GreengageDB/greengage": "https://github.com/GreengageDB/greengage/commits/main.atom",
     # Arenadata DB (arenadata/gpdb) — Greenplum-based MPP warehouse; follow commit activity.
     "https://github.com/arenadata/gpdb": "https://github.com/arenadata/gpdb/commits/master.atom",
+    # Supabase — Postgres backend platform; native blog feed (higher-signal than repo commits).
+    "https://supabase.com/blog": "https://supabase.com/rss.xml",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.
