@@ -100,6 +100,10 @@ FEEDS = {
     "https://github.com/pg-sharding/spqr": "https://github.com/pg-sharding/spqr/commits/master.atom",
     # ClickHouse — columnar OLAP DB; follow commit activity (no blog RSS).
     "https://github.com/ClickHouse/ClickHouse": "https://github.com/ClickHouse/ClickHouse/commits/master.atom",
+    # WAL-G — PostgreSQL/MySQL backup & archival tool; follow commit activity.
+    "https://github.com/wal-g/wal-g": "https://github.com/wal-g/wal-g/commits/master.atom",
+    # pgconsul (Yandex) — PostgreSQL HA / automatic failover; follow commit activity.
+    "https://github.com/yandex/pgconsul": "https://github.com/yandex/pgconsul/commits/main.atom",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.

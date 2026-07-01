@@ -12,6 +12,8 @@
     { "cat": "postgresdb", "t": "#postgrespro", "u": "https://habr.com/ru/companies/postgrespro/articles/" },
     { "cat": "postgresdb", "t": "#tantor", "u": "https://habr.com/ru/companies/tantor/articles/" },
     { "cat": "postgresdb", "t": "#orion-soft", "u": "https://habr.com/ru/companies/orion_soft/articles/" },
+    { "cat": "postgresdb", "t": "#wal-g", "u": "https://github.com/wal-g/wal-g" },
+    { "cat": "postgresdb", "t": "#pgconsul", "u": "https://github.com/yandex/pgconsul" },
     { "cat": "distributive-db", "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" },
     { "cat": "distributive-db", "t": "#arenadata", "u": "https://habr.com/ru/companies/arenadata/articles/" },
     { "cat": "distributive-db", "t": "#starrocks", "u": "https://www.starrocks.io/blog/" },
@@ -43,7 +45,9 @@
           { "t": "pganalyze · 5mins of Postgres", "u": "https://pganalyze.com/blog" },
           { "t": "PostgreSQL News Archive", "u": "https://www.postgresql.org/about/newsarchive/" },
           { "t": "Postgres Pro blog [ru]", "u": "https://habr.com/ru/companies/postgrespro/articles/" },
-          { "t": "Habr · PostgreSQL [ru]", "u": "https://habr.com/ru/hubs/postgresql/" }
+          { "t": "Habr · PostgreSQL [ru]", "u": "https://habr.com/ru/hubs/postgresql/" },
+          { "t": "WAL-G · backup (commits)", "u": "https://github.com/wal-g/wal-g" },
+          { "t": "pgconsul · HA/failover (commits)", "u": "https://github.com/yandex/pgconsul" }
         ],
         "research": [
           { "t": "arXiv · Postgres", "u": "https://arxiv.org/search/?searchtype=all&query=postgresql" },
