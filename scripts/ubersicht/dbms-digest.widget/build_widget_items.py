@@ -104,6 +104,10 @@ FEEDS = {
     "https://github.com/wal-g/wal-g": "https://github.com/wal-g/wal-g/commits/master.atom",
     # pgconsul (Yandex) — PostgreSQL HA / automatic failover; follow commit activity.
     "https://github.com/yandex/pgconsul": "https://github.com/yandex/pgconsul/commits/main.atom",
+    # Greengage — Greenplum fork (PostgreSQL-based MPP warehouse); follow commit activity.
+    "https://github.com/GreengageDB/greengage": "https://github.com/GreengageDB/greengage/commits/main.atom",
+    # Arenadata DB (arenadata/gpdb) — Greenplum-based MPP warehouse; follow commit activity.
+    "https://github.com/arenadata/gpdb": "https://github.com/arenadata/gpdb/commits/master.atom",
     # mailing lists via mail-archive.com — use the @lists.postgresql.org address (current).
     # The @postgresql.org address is the FROZEN pre-pglister archive (hackers stops at 2017,
     # bugs at 2013) — do NOT use it. pgsql-bugs has no working current feed, so it stays link-only.

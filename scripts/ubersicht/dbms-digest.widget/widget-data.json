@@ -16,6 +16,8 @@
     { "cat": "postgresdb", "t": "#pgconsul", "u": "https://github.com/yandex/pgconsul" },
     { "cat": "distributive-db", "t": "#cloudberry", "u": "https://cloudberry.apache.org/blog" },
     { "cat": "distributive-db", "t": "#arenadata", "u": "https://habr.com/ru/companies/arenadata/articles/" },
+    { "cat": "distributive-db", "t": "#greengage", "u": "https://github.com/GreengageDB/greengage" },
+    { "cat": "distributive-db", "t": "#gpdb", "u": "https://github.com/arenadata/gpdb" },
     { "cat": "distributive-db", "t": "#starrocks", "u": "https://www.starrocks.io/blog/" },
     { "cat": "distributive-db", "t": "#clickhouse", "u": "https://github.com/ClickHouse/ClickHouse" },
     { "cat": "distributive-db", "t": "#iceberg", "u": "https://github.com/apache/iceberg/releases" },
@@ -126,7 +128,9 @@
           { "t": "DB Weekly", "u": "https://dbweekly.com/" },
           { "t": "The New Stack · Databases", "u": "https://thenewstack.io/data/" },
           { "t": "SPQR · pg-sharding (commits)", "u": "https://github.com/pg-sharding/spqr" },
-          { "t": "ClickHouse (commits)", "u": "https://github.com/ClickHouse/ClickHouse" }
+          { "t": "ClickHouse (commits)", "u": "https://github.com/ClickHouse/ClickHouse" },
+          { "t": "Greengage · Greenplum fork (commits)", "u": "https://github.com/GreengageDB/greengage" },
+          { "t": "Arenadata DB · gpdb (commits)", "u": "https://github.com/arenadata/gpdb" }
         ],
         "research": [
           { "t": "arXiv · Distributed DB", "u": "https://arxiv.org/search/?searchtype=all&query=distributed+database" },
