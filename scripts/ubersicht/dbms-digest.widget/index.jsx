@@ -49,7 +49,14 @@ export const className = `
                  color: #7f93ad; margin-left: 12px; }
   h1 .dbw-auto:hover { color: #cfe0f4; }
 
-  .dbw-pins { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
+  .dbw-pingroups { margin-bottom: 8px; }
+  .dbw-pinrow { display: flex; align-items: baseline; flex-wrap: wrap; gap: 5px; margin-bottom: 4px; }
+  .dbw-pincat {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+    color: #7f8ea3; min-width: 92px; flex: 0 0 92px; text-align: right; padding-right: 6px;
+    opacity: .85;
+  }
+  .dbw-pins { display: flex; flex-wrap: wrap; gap: 5px; }
   .dbw-pins label, .dbw-pins a {
     font-size: 10.5px; font-weight: 600; padding: 2px 8px; border-radius: 6px;
     color: #9ec5ff; background: rgba(158,197,255,.10); text-decoration: none;
@@ -204,6 +211,11 @@ export const render = ({ output }) => {
     });
   });
   const pins = Array.isArray(data.pins) ? data.pins : [];
+  const pinCats = pins.reduce((acc, p) => {
+    const c = p.cat || "прочее";
+    if (acc.indexOf(c) === -1) acc.push(c);
+    return acc;
+  }, []);
   const hasFresh = (p) => Array.isArray(p.fresh) && p.fresh.length > 0;
   pins.forEach((p, i) => {
     if (!hasFresh(p)) return;   // no-feed pins are plain links, not expandable
@@ -232,11 +244,19 @@ export const render = ({ output }) => {
           : null
       ))}
       {pins.length ? (
-        <div className="dbw-pins">
-          {pins.map((p, i) => (
-            hasFresh(p)
-              ? <label htmlFor={`dbw-pin-${i}`} key={`pl-${i}`}>{esc(p.t)}</label>
-              : <a href={p.u} key={`pl-${i}`}>{esc(p.t)}</a>
+        <div className="dbw-pingroups">
+          {pinCats.map((cat) => (
+            <div className="dbw-pinrow" key={`cat-${cat}`}>
+              <span className="dbw-pincat">{esc(cat)}</span>
+              <div className="dbw-pins">
+                {pins.map((p, i) => (
+                  (p.cat || "прочее") !== cat ? null :
+                    hasFresh(p)
+                      ? <label htmlFor={`dbw-pin-${i}`} key={`pl-${i}`}>{esc(p.t)}</label>
+                      : <a href={p.u} key={`pl-${i}`}>{esc(p.t)}</a>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       ) : null}
