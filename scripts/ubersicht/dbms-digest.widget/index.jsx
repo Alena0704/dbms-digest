@@ -102,6 +102,7 @@ export const className = `
   ul.dbw-list a { color: #d6e2f2; text-decoration: none; pointer-events: auto; }
   ul.dbw-list a:hover { color: #fff; }
   .dbw-srctag { font-size: 9.5px; color: #6f819a; margin-left: 5px; white-space: nowrap; }
+  .dbw-date { font-size: 9px; color: #62748c; margin-left: 5px; white-space: nowrap; font-variant-numeric: tabular-nums; opacity: .95; }
   .dbw-empty { font-size: 12px; color: #6f819a; padding-left: 2px; }
   .dbw-ai { cursor: pointer; pointer-events: auto; margin-left: 6px; opacity: .5; font-size: 11px; }
   .dbw-ai:hover { opacity: 1; }
@@ -170,6 +171,7 @@ const list = (items, withSrc) => (
       <li key={j}>
         <a href={it.u}>{esc(it.t)}</a>
         {withSrc && it.src ? <span className="dbw-srctag">{esc(it.src)}</span> : null}
+        {it.sub ? <span className="dbw-date">{esc(it.sub)}</span> : null}
         <span className="dbw-ai" onClick={(e) => doSummary(e, it)} title="Краткая выжимка (Claude)">✨</span>
         <div className="dbw-sum" />
       </li>
@@ -271,7 +273,7 @@ export const render = ({ output }) => {
                   {p.fresh.map((it, j) => (
                     <li key={j}>
                       <a href={it.u}>{esc(it.t)}</a>
-                      {it.sub ? <span className="dbw-srctag">{esc(it.sub)}</span> : null}
+                      {it.sub ? <span className="dbw-date">{esc(it.sub)}</span> : null}
                       <span className="dbw-ai" onClick={(e) => doSummary(e, it)} title="Краткая выжимка (Claude)">✨</span>
                       <div className="dbw-sum" />
                     </li>

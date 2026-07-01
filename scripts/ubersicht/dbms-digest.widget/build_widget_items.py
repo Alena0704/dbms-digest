@@ -161,8 +161,27 @@ def _date(text: str) -> float:
         return 0.0
 
 
+def _fmt_date(ts: float) -> str:
+    """Unix ts → 'YYYY-MM-DD' (empty string if unknown)."""
+    if not ts:
+        return ""
+    from datetime import datetime, timezone
+    try:
+        return datetime.fromtimestamp(ts, tz=timezone.utc).strftime("%Y-%m-%d")
+    except Exception:
+        return ""
+
+
+def _sub_for(feed_url: str, ts: float, author: str) -> str:
+    """Build the small caption under an item: date, or 'author · date' for commit feeds."""
+    d = _fmt_date(ts)
+    if "/commits/" in (feed_url or "") and author:
+        return f"{author} · {d}" if d else author
+    return d
+
+
 def fetch_feed(url: str):
-    """Return list of (title, link, ts) for one feed, newest first; [] on any error."""
+    """Return list of (title, link, ts, author) for one feed, newest first; [] on any error."""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": UA})
         raw = urllib.request.urlopen(req, timeout=TIMEOUT).read()
@@ -174,7 +193,7 @@ def fetch_feed(url: str):
     for el in root.iter():
         if _local(el.tag) not in ("item", "entry"):
             continue
-        title = link = date = ""
+        title = link = date = author = ""
         for c in el:
             ln = _local(c.tag)
             if ln == "title" and not title:
@@ -187,8 +206,17 @@ def fetch_feed(url: str):
                     link = c.text.strip()  # RSS
             elif ln in ("pubdate", "published", "updated", "date") and not date:
                 date = (c.text or "").strip()
+            elif ln == "author" and not author:
+                # Atom nests <name>; RSS puts text directly.
+                nm = ""
+                for cc in c:
+                    if _local(cc.tag) == "name":
+                        nm = (cc.text or "").strip()
+                author = nm or (c.text or "").strip()
+            elif ln == "creator" and not author:   # dc:creator (RSS)
+                author = (c.text or "").strip()
         if title and link:
-            out.append((title, link, _date(date)))
+            out.append((title, link, _date(date), author))
         if len(out) >= PER_FEED:
             break
     return out
@@ -294,7 +322,7 @@ def scrape_substack():
     """Merge several CS/DB Substack feeds, newest first, capped per source for variety."""
     rows = []
     for name, url in SUBSTACK_FEEDS:
-        for (t, link, ts) in fetch_feed(url):
+        for (t, link, ts, _author) in fetch_feed(url):
             rows.append((ts, t, link, name))
     rows.sort(key=lambda r: r[0], reverse=True)
     out, per, seen = [], {}, set()
@@ -303,7 +331,7 @@ def scrape_substack():
             continue
         seen.add(link)
         per[name] = per.get(name, 0) + 1
-        out.append({"t": t, "u": link, "src": name})
+        out.append({"t": t, "u": link, "src": name, "sub": _fmt_date(ts)})
         if len(out) >= PER_CELL:
             break
     return out
@@ -381,8 +409,9 @@ def main() -> None:
                 if not feed:
                     continue
                 src = short_src(s.get("t", ""))
-                for title, link, ts in feed_cache.get(feed, []):
-                    row = {"t": title, "u": link, "src": src, "_ts": ts, "_feed": feed}
+                for title, link, ts, author in feed_cache.get(feed, []):
+                    row = {"t": title, "u": link, "src": src, "_ts": ts, "_feed": feed,
+                           "sub": _sub_for(feed, ts, author)}
                     merged.append(row)
                     if feed not in HOME_EXCLUDE:
                         home.append(row)
@@ -401,7 +430,7 @@ def main() -> None:
                 else:
                     extra.append(m)
             ordered = diverse + extra
-            fresh = [{"t": m["t"], "u": m["u"], "src": m["src"]} for m in ordered[:PER_CELL]]
+            fresh = [{"t": m["t"], "u": m["u"], "src": m["src"], "sub": m.get("sub", "")} for m in ordered[:PER_CELL]]
             cells[type_id] = {"sources": sources, "fresh": fresh}
 
     # Tags (pins): each pin with a feed gets up to PER_CELL fresh items.
@@ -427,14 +456,14 @@ def main() -> None:
             continue
         items = sorted(feed_cache.get(feed, []), key=lambda x: x[2], reverse=True)
         fresh, seen = [], set()
-        for t, u, _ts in items:
+        for t, u, _ts, _author in items:
             # collapse mailing-list threads: strip leading "Re:" / "[PATCH]" tokens, then key on subject
             base = re.sub(r"^((re:|\[[^\]]*\])\s*)+", "", t.strip(), flags=re.I)
             k = "".join(ch for ch in base.lower() if ch.isalnum())[:50]
             if k in seen:
                 continue
             seen.add(k)
-            fresh.append({"t": t, "u": u})
+            fresh.append({"t": t, "u": u, "sub": _sub_for(feed, _ts, _author)})
             if len(fresh) >= PER_CELL:
                 break
         p["fresh"] = fresh
@@ -458,7 +487,7 @@ def main() -> None:
             continue
         seen_u.add(m["u"]); seen_t |= keys
         per_src[m["src"]] = per_src.get(m["src"], 0) + 1
-        home_top.append({"t": m["t"], "u": m["u"], "src": m["src"]})
+        home_top.append({"t": m["t"], "u": m["u"], "src": m["src"], "sub": m.get("sub", "")})
         if len(home_top) >= HOME_N:
             break
     data["home"] = home_top
